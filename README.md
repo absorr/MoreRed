@@ -3,8 +3,11 @@ MoreRed is a mod that adds more ways to activate redstone, and more things to do
 
 ## Statistics
 Recomended Version: MoreRed v1.0
+
 Website: http://absorr.pcriot.com/mods/mod_MoreRed.html
+
 Liscense: Creative Commens BY-NC-ND 3.0
+
 Author: Absorr Studios
 
 ## Pre-Releases VS Development Builds
