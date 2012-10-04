@@ -28,7 +28,7 @@ public class BlockInventoryScanner extends BlockContainer
 	@Override
 	public String getTextureFile() 
 	{
-		return "/morecrafts/blocks.png";
+		return "/morered/blocks.png";
 	}
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
     {
