@@ -2,6 +2,9 @@ package net.minecraft.src.absorr.morered;
 import net.minecraft.src.*;
 import net.minecraft.src.absorr.morecrafts.*;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -9,6 +12,7 @@ import java.util.Random;
 public class BlockInventoryScanner extends BlockContainer
 {
 	private EnumMobType triggerMobType;
+	private boolean isActive = false;
 	public BlockInventoryScanner(int i, int j) 
     { 
         super(i, j, Material.iron);   
@@ -88,7 +92,7 @@ public class BlockInventoryScanner extends BlockContainer
     }
     private void scanInventory(World par1World, int par2, int par3, int par4, EntityPlayer player)
     {
-        boolean var5 = par1World.getBlockMetadata(par2, par3, par4) == 1;
+        boolean var5 = isActive;
         boolean var6 = false;
         float var7 = 0.125F;
         List var8 = null;
@@ -399,11 +403,11 @@ public class BlockInventoryScanner extends BlockContainer
         
         if (var12)
         {
-        	par1World.setBlockMetadataWithNotify(par2, par3, par4, 1);
+        	this.isActive = true;
         	par1World.markBlocksDirty(par2, par3, par4, par2, par3, par4);
         	par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate());
         }
-        else {par1World.setBlockMetadataWithNotify(par2, par3, par4, 0);}
+        else {this.isActive = false;}
     }
     public void scanForItem (World par1World, int par2, int par3, int par4, ItemStack par5)
     {
@@ -729,10 +733,14 @@ public class BlockInventoryScanner extends BlockContainer
     {
         if (!par1World.isRemote)
         {
-            if (par1World.getBlockMetadata(par2, par3, par4) != 0)
+            if (this.isActive)
             {
-            	par1World.setBlockMetadataWithNotify(par2, par3, par4, 0);
+            	this.isActive = false;
             }
+        }
+        if (par1World.getBlockMetadata(par2, par3, par4) == 1)
+        {
+        	this.setBlockBounds(0F, 0F, 0.5F, 0.5F, 2F, 1F);
         }
     }
     public boolean blockActivated(World world, int x, int y, int z,EntityPlayer player)
@@ -762,7 +770,7 @@ public class BlockInventoryScanner extends BlockContainer
      */
     public boolean isPoweringTo(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
-        return par1IBlockAccess.getBlockMetadata(par2, par3, par4) > 0;
+        return isActive;
     }
 
     /**
@@ -770,7 +778,7 @@ public class BlockInventoryScanner extends BlockContainer
      */
     public boolean isIndirectlyPoweringTo(World par1World, int par2, int par3, int par4, int par5)
     {
-        return par1World.getBlockMetadata(par2, par3, par4) > 0;
+        return isActive;
     }
 
     /**
@@ -784,4 +792,75 @@ public class BlockInventoryScanner extends BlockContainer
 	public TileEntity createNewTileEntity(World var1) {
 		return new TileEntityScanner();
 	}
+    public void onBlockAdded(World par1World, int par2, int par3, int par4)
+    {
+        super.onBlockAdded(par1World, par2, par3, par4);
+        this.setDefaultDirection(par1World, par2, par3, par4);
+    }
+    private void setDefaultDirection(World par1World, int par2, int par3, int par4)
+    {
+        if (!par1World.isRemote)
+        {
+            int var5 = par1World.getBlockId(par2, par3, par4 - 1);
+            int var6 = par1World.getBlockId(par2, par3, par4 + 1);
+            int var7 = par1World.getBlockId(par2 - 1, par3, par4);
+            int var8 = par1World.getBlockId(par2 + 1, par3, par4);
+            byte var9 = 3;
+
+            if (Block.opaqueCubeLookup[var5] && !Block.opaqueCubeLookup[var6])
+            {
+                var9 = 1;
+            }
+
+            if (Block.opaqueCubeLookup[var6] && !Block.opaqueCubeLookup[var5])
+            {
+                var9 = 1;
+            }
+
+            if (Block.opaqueCubeLookup[var7] && !Block.opaqueCubeLookup[var8])
+            {
+                var9 = 0;
+            }
+
+            if (Block.opaqueCubeLookup[var8] && !Block.opaqueCubeLookup[var7])
+            {
+                var9 = 0;
+            }
+
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, var9);
+            if (par1World.getBlockMetadata(par2, par3, par4) == 1)
+            {
+            	this.setBlockBounds(0F, 0F, 0.5F, 0.5F, 2F, 1F);
+            }
+        }
+    }
+	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving)
+    {
+        int var6 = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+
+        if (var6 == 0)
+        {
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 1);
+        }
+
+        if (var6 == 1)
+        {
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 0);
+        }
+
+        if (var6 == 2)
+        {
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 1);
+        }
+
+        if (var6 == 3)
+        {
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 0);
+        }
+        
+        if (par1World.getBlockMetadata(par2, par3, par4) == 1)
+        {
+        	this.setBlockBounds(0F, 0F, 0.5F, 0.5F, 2F, 1F);
+        }
+    }
 }
