@@ -30,6 +30,29 @@ public class BlockInventoryScanner extends BlockContainer
 	{
 		return "/morecrafts/blocks.png";
 	}
+	public int getBlockTextureFromSideAndMetadata(int i, int j)
+    {
+		if (!isActive)
+        {
+                return 6;
+        }
+        else
+        {
+                return 7;
+        }
+    }
+
+    public int getBlockTextureFromSide(int i)
+    {
+            if (!isActive)
+            {
+                    return 6;
+            }
+            else
+            {
+                    return 7;
+            }
+    }
     public int idDropped(int i, Random random) 
     { 
        return mod_MoreRed.invScanner.blockID; 
