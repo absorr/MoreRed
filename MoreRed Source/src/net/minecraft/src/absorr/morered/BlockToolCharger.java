@@ -164,7 +164,8 @@ public class BlockToolCharger extends Block
                     return iblockaccess.getBlockId(i, j, k) != blockID;
             }
     }
-    public boolean blockActivated(World world, int x, int y, int z,EntityPlayer player)
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z,EntityPlayer player, int par6, float par7, float par8, float par9)
     {
     	ItemStack heldItem = player.inventory.getCurrentItem();//This is to get the item that the player is currently holding. (if any)
     	int meta = world.getBlockMetadata(x, y, z);

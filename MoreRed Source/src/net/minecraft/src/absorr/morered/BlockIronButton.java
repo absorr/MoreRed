@@ -227,7 +227,7 @@ public class BlockIronButton extends Block
      */
     public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer)
     {
-        this.blockActivated(par1World, par2, par3, par4, par5EntityPlayer);
+        this.onBlockActivated(par1World, par2, par3, par4,par5EntityPlayer, 1, 1, 1, 1);
     }
     
     boolean shift;
@@ -244,9 +244,10 @@ public class BlockIronButton extends Block
      * Called upon block activation (left or right click on the block.). The three integers represent x,y,z of the
      * block.
      */
-    public boolean blockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer)
+    @Override
+    public boolean onBlockActivated(World par1World, int par2, int par3, int par4,EntityPlayer player, int par6, float par7, float par8, float par9)
     {
-    	ItemStack heldItem = par5EntityPlayer.inventory.getCurrentItem();
+    	ItemStack heldItem = player.inventory.getCurrentItem();
     	ItemStack tweaker = new ItemStack(mod_MoreRed.screwdriver);
     	if (heldItem.itemID == tweaker.itemID)
     	{

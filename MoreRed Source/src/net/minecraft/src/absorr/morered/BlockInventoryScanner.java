@@ -1,6 +1,8 @@
 package net.minecraft.src.absorr.morered;
 import net.minecraft.src.*;
 import net.minecraft.src.absorr.morecrafts.*;
+import net.minecraft.src.absorr.morered.GuiScanner;
+import net.minecraft.src.absorr.morered.TileEntityScanner;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -766,22 +768,16 @@ public class BlockInventoryScanner extends BlockContainer
         	this.setBlockBounds(0F, 0F, 0.5F, 0.5F, 2F, 1F);
         }
     }
-    public boolean blockActivated(World world, int x, int y, int z,EntityPlayer player)
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z,EntityPlayer player, int par6, float par7, float par8, float par9)
     {
-    	if (world.isRemote)
+    	TileEntityScanner var6 = (TileEntityScanner)world.getBlockTileEntity(x, y, z);
+        if (var6 != null)
         {
-            return true;
+            ModLoader.openGUI(ModLoader.getMinecraftInstance().thePlayer, new GuiScanner(ModLoader.getMinecraftInstance().thePlayer.inventory, var6));
         }
-        else
-        {
-            TileEntityScanner var6 = (TileEntityScanner)world.getBlockTileEntity(x, y, z);
-            if (var6 != null)
-            {
-                ModLoader.openGUI(ModLoader.getMinecraftInstance().thePlayer, new GuiScanner(ModLoader.getMinecraftInstance().thePlayer.inventory, var6));
-            }
 
-            return true;
-        }
+        return true;
     }
     
     public void addCreativeItems(ArrayList itemList)

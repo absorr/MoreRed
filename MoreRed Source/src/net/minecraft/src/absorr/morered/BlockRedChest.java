@@ -7,6 +7,7 @@ import java.util.*;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 import net.minecraft.src.*;
+import net.minecraft.src.absorr.morered.TileEntityRedChest;
 
 public class BlockRedChest extends Block
 {
