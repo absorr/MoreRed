@@ -6,6 +6,7 @@
 .project
 .metadata
 bin/
+MoreRed Source/bin/
 tmp/
 *.tmp
 *.bak

@@ -75,6 +75,7 @@ public class mod_MoreRed extends BaseMod
     	MinecraftForgeClient.preloadTexture("/morered/items.png"); 
   		MinecraftForgeClient.preloadTexture("/morered/blocks.png");
   		ModLoader.registerTileEntity(TileEntityScanner.class, "Inventory Scanner");
+  		ModLoader.registerTileEntity(TileEntityRedChest.class, "Redstone Chest");
     	EntityList.entityEggs.put(Integer.valueOf(63), new EntityEggInfo(63, 0, 9118312));
     	
     	//Villager Trading "Recipes"
