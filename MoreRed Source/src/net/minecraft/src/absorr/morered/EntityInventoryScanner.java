@@ -4,6 +4,7 @@ import net.minecraft.src.absorr.morecrafts.*;
 
 import java.util.Random;
 
+
 public class EntityInventoryScanner extends Entity
 {
     public EntityInventoryScanner(World world)

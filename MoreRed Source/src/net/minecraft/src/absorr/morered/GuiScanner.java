@@ -8,6 +8,7 @@ import net.minecraft.src.absorr.morecrafts.*;
 
 import org.lwjgl.opengl.GL11;
 
+
 public class GuiScanner extends GuiContainer
 {
     private TileEntityScanner invFurnaceInventory;

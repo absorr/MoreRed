@@ -5,6 +5,7 @@ import net.minecraft.src.absorr.morecrafts.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+
 public class BlockToolCharger extends Block
 {
 	public BlockToolCharger(int i, int j) 

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 public class BlockInventoryScanner extends BlockContainer
 {
 	private EnumMobType triggerMobType;

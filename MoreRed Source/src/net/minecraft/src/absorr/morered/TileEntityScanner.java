@@ -4,6 +4,7 @@ import net.minecraft.src.absorr.morecrafts.*;
 
 import java.util.Random;
 
+
 public class TileEntityScanner extends TileEntity implements IInventory
 {
     private ItemStack[] scannerContents = new ItemStack[9];

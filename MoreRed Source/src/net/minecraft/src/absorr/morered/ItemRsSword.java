@@ -1,4 +1,5 @@
 package net.minecraft.src.absorr.morered;
+
 import net.minecraft.src.*;
 import net.minecraft.src.absorr.morecrafts.*;
 

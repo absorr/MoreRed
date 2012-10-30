@@ -83,6 +83,32 @@ public class mod_MoreRed extends BaseMod
     	npcTrade.addToListWithCheck(new MerchantRecipe (new ItemStack (Item.emerald, 4), new ItemStack (rsMulti, 1)));
     	npcTrade.addToListWithCheck(new MerchantRecipe (new ItemStack (Item.emerald, 4), new ItemStack (rsIngot, 3)));
     	npcTrade.addToListWithCheck(new MerchantRecipe (new ItemStack (rsIngot, 3), new ItemStack (Item.emerald, 1)));
+    	
+    	//EntityItemList Vanilla Entities
+    	EntityItemList.addEntityItem(new EntityZombie(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.rottenFlesh));
+    	EntityItemList.addEntityItem(new EntitySpider(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.silk));
+    	EntityItemList.addEntityItem(new EntitySkeleton(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.arrow));
+    	EntityItemList.addEntityItem(new EntityEnderman(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.enderPearl));
+    	EntityItemList.addEntityItem(new EntitySilverfish(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Block.stone));
+    	EntityItemList.addEntityItem(new EntityBlaze(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.blazeRod));
+    	EntityItemList.addEntityItem(new EntityGhast(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.ghastTear));
+    	EntityItemList.addEntityItem(new EntityCreeper(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.gunpowder));
+    	EntityItemList.addEntityItem(new EntityCaveSpider(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.fermentedSpiderEye));
+    	EntityItemList.addEntityItem(new EntitySlime(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.slimeBall));
+    	EntityItemList.addEntityItem(new EntityPigZombie(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.goldNugget));
+    	
+    	EntityItemList.addEntityItem(new EntityPig(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.porkRaw));
+    	EntityItemList.addEntityItem(new EntityCow(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.beefRaw));
+    	EntityItemList.addEntityItem(new EntitySheep(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Block.cloth));
+    	EntityItemList.addEntityItem(new EntitySquid(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.dyePowder));
+    	EntityItemList.addEntityItem(new EntityChicken(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.chickenRaw));
+    	EntityItemList.addEntityItem(new EntityIronGolem(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.ingotIron));
+    	EntityItemList.addEntityItem(new EntityMooshroom(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Block.mushroomRed));
+    	EntityItemList.addEntityItem(new EntityWolf(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.bone));
+    	EntityItemList.addEntityItem(new EntityOcelot(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.fishRaw));
+    	EntityItemList.addEntityItem(new EntitySnowman(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.snowball));
+    	EntityItemList.addEntityItem(new EntityVillager(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.leather));
+    	EntityItemList.addEntityItem(new EntityArrow(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.arrow));
     }
     public boolean classExists (String className)
     {
