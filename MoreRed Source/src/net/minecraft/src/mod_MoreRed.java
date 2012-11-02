@@ -1,7 +1,8 @@
 package net.minecraft.src;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.absorr.morered.*;
-import net.minecraft.src.absorr.morered.external.IC2Handler;
+//import net.minecraft.src.absorr.morered.external.IC2Handler;
 import net.minecraftforge.client.*;
 import net.minecraftforge.common.*;
 import java.awt.List;
@@ -19,6 +20,7 @@ public class mod_MoreRed extends BaseMod
 	static int rechargeID = configurationProperties();
 	static int scannerID;
 	static int ironButtonID;
+	static int rsChestID;
     static int rsChunkID;
     static int rsIngotID;
     static int rsPickID;
@@ -32,18 +34,20 @@ public class mod_MoreRed extends BaseMod
     public static int configurationProperties()
     {
             configuration.load();
-            rechargeID = Integer.parseInt(configuration.getOrCreateBlockIdProperty("Tool_Recharging_Station", 190).value);
-            scannerID = Integer.parseInt(configuration.getOrCreateIntProperty("Inventory_Scanner", Configuration.CATEGORY_BLOCK, 193).value);
-            ironButtonID = Integer.parseInt(configuration.getOrCreateIntProperty("Iron_Button", Configuration.CATEGORY_BLOCK, 194).value);rsChunkID = Integer.parseInt(configuration.getOrCreateIntProperty("Redstone_Chunk", Configuration.CATEGORY_ITEM, 5980).value);
-            rsIngotID = Integer.parseInt(configuration.getOrCreateIntProperty("Redstone_Ingot", Configuration.CATEGORY_ITEM, 5981).value);
-            rsPickID = Integer.parseInt(configuration.getOrCreateIntProperty("Redstone_Pickaxe", Configuration.CATEGORY_ITEM, 5983).value);
-            rsSpadeID = Integer.parseInt(configuration.getOrCreateIntProperty("Redstone_Shovel", Configuration.CATEGORY_ITEM, 5984).value);
-            rsHoeID = Integer.parseInt(configuration.getOrCreateIntProperty("Redstone_Hoe", Configuration.CATEGORY_ITEM, 5985).value);
-            rsAxeID = Integer.parseInt(configuration.getOrCreateIntProperty("Redstone_Axe", Configuration.CATEGORY_ITEM, 5986).value);
-            rsSwordID = Integer.parseInt(configuration.getOrCreateIntProperty("Redstone_Sword", Configuration.CATEGORY_ITEM, 5987).value);
-            rsMultiID = Integer.parseInt(configuration.getOrCreateIntProperty("Redstone_Multi_Tool", Configuration.CATEGORY_ITEM, 5988).value);
-            crowbarID = Integer.parseInt(configuration.getOrCreateIntProperty("Crowbar", Configuration.CATEGORY_ITEM, 5999).value);
-            screwdriverID = Integer.parseInt(configuration.getOrCreateIntProperty("Screwdriver", Configuration.CATEGORY_ITEM, 6000).value);
+            rechargeID = Integer.parseInt(configuration.getBlock("Tool_Recharging_Station", 190).value);
+            scannerID = Integer.parseInt(configuration.getBlock("Inventory_Scanner", Configuration.CATEGORY_BLOCK, 193).value);
+            ironButtonID = Integer.parseInt(configuration.getBlock("Iron_Button", Configuration.CATEGORY_BLOCK, 194).value);
+            rsChestID = Integer.parseInt(configuration.getBlock("Redstone_Chest", Configuration.CATEGORY_BLOCK, 195).value);
+            rsChunkID = Integer.parseInt(configuration.getItem("Redstone_Chunk", Configuration.CATEGORY_ITEM, 5980).value);
+            rsIngotID = Integer.parseInt(configuration.getItem("Redstone_Ingot", Configuration.CATEGORY_ITEM, 5981).value);
+            rsPickID = Integer.parseInt(configuration.getItem("Redstone_Pickaxe", Configuration.CATEGORY_ITEM, 5983).value);
+            rsSpadeID = Integer.parseInt(configuration.getItem("Redstone_Shovel", Configuration.CATEGORY_ITEM, 5984).value);
+            rsHoeID = Integer.parseInt(configuration.getItem("Redstone_Hoe", Configuration.CATEGORY_ITEM, 5985).value);
+            rsAxeID = Integer.parseInt(configuration.getItem("Redstone_Axe", Configuration.CATEGORY_ITEM, 5986).value);
+            rsSwordID = Integer.parseInt(configuration.getItem("Redstone_Sword", Configuration.CATEGORY_ITEM, 5987).value);
+            rsMultiID = Integer.parseInt(configuration.getItem("Redstone_Multi_Tool", Configuration.CATEGORY_ITEM, 5988).value);
+            crowbarID = Integer.parseInt(configuration.getItem("Crowbar", Configuration.CATEGORY_ITEM, 5999).value);
+            screwdriverID = Integer.parseInt(configuration.getItem("Screwdriver", Configuration.CATEGORY_ITEM, 6000).value);
             configuration.save();
             return rechargeID;
     }
@@ -56,12 +60,13 @@ public class mod_MoreRed extends BaseMod
     public static final Item rsHoe = new ItemHoe(rsHoeID, EnumToolMaterial.IRON).setItemName("redstoneHoe").setIconIndex(6);
     public static final Item rsAxe = new MoreItems(rsAxeID, 1, CreativeTabs.tabTools).setItemName("redstoneAxe").setIconIndex(7);
     public static final Item rsSword = new ItemRsSword(rsSwordID, EnumToolMaterial.IRON).setItemName("redstoneSword").setIconIndex(8);
-    public static final Item rsMulti = new MoreItems(rsMultiID, 1, CreativeTabs.tabTools).setItemName("redstoneMultitool").setIconIndex(14);
+    public static final Item rsMulti = new ItemMultiTool(rsMultiID, 1, EnumToolMaterial.IRON).setItemName("redstoneMultitool").setIconIndex(14);
     public static final Item crowbar = new MoreItems(crowbarID, 1, CreativeTabs.tabTools).setItemName("crowbar").setIconIndex(16);
     public static final Item screwdriver = new MoreItems(screwdriverID, 1, CreativeTabs.tabTools).setItemName("screwdriver").setIconIndex(1);
     public static Block recharger = new BlockToolCharger(rechargeID, 0).setHardness(1.0F).setResistance(6000.0F).setLightValue(1.0F).setBlockName("Tool Recharging Station"); 
     public static Block invScanner = new BlockInventoryScanner(scannerID, 6).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Inventory Scanner"); 
     public static Block ironButton = new BlockIronButton(ironButtonID, 22).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Iron Button"); 
+    public static Block rsChest = new BlockRedChest(rsChestID).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Redstone Chest"); 
     
     
     public void load()
@@ -69,9 +74,6 @@ public class mod_MoreRed extends BaseMod
     	MinecraftForge.setToolClass(rsPick, "pickaxe", 2);
     	MinecraftForge.setToolClass(rsSpade, "shovel", 2);
     	MinecraftForge.setToolClass(rsAxe, "axe", 2);
-    	MinecraftForge.setToolClass(rsMulti, "pickaxe", 2);
-    	MinecraftForge.setToolClass(rsMulti, "shovel", 2);
-    	MinecraftForge.setToolClass(rsMulti, "axe", 2);
     	MinecraftForgeClient.preloadTexture("/morered/items.png"); 
   		MinecraftForgeClient.preloadTexture("/morered/blocks.png");
   		ModLoader.registerTileEntity(TileEntityScanner.class, "Inventory Scanner");
@@ -83,32 +85,6 @@ public class mod_MoreRed extends BaseMod
     	npcTrade.addToListWithCheck(new MerchantRecipe (new ItemStack (Item.emerald, 4), new ItemStack (rsMulti, 1)));
     	npcTrade.addToListWithCheck(new MerchantRecipe (new ItemStack (Item.emerald, 4), new ItemStack (rsIngot, 3)));
     	npcTrade.addToListWithCheck(new MerchantRecipe (new ItemStack (rsIngot, 3), new ItemStack (Item.emerald, 1)));
-    	
-    	//EntityItemList Vanilla Entities
-    	EntityItemList.addEntityItem(new EntityZombie(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.rottenFlesh));
-    	EntityItemList.addEntityItem(new EntitySpider(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.silk));
-    	EntityItemList.addEntityItem(new EntitySkeleton(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.arrow));
-    	EntityItemList.addEntityItem(new EntityEnderman(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.enderPearl));
-    	EntityItemList.addEntityItem(new EntitySilverfish(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Block.stone));
-    	EntityItemList.addEntityItem(new EntityBlaze(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.blazeRod));
-    	EntityItemList.addEntityItem(new EntityGhast(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.ghastTear));
-    	EntityItemList.addEntityItem(new EntityCreeper(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.gunpowder));
-    	EntityItemList.addEntityItem(new EntityCaveSpider(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.fermentedSpiderEye));
-    	EntityItemList.addEntityItem(new EntitySlime(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.slimeBall));
-    	EntityItemList.addEntityItem(new EntityPigZombie(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.goldNugget));
-    	
-    	EntityItemList.addEntityItem(new EntityPig(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.porkRaw));
-    	EntityItemList.addEntityItem(new EntityCow(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.beefRaw));
-    	EntityItemList.addEntityItem(new EntitySheep(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Block.cloth));
-    	EntityItemList.addEntityItem(new EntitySquid(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.dyePowder));
-    	EntityItemList.addEntityItem(new EntityChicken(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.chickenRaw));
-    	EntityItemList.addEntityItem(new EntityIronGolem(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.ingotIron));
-    	EntityItemList.addEntityItem(new EntityMooshroom(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Block.mushroomRed));
-    	EntityItemList.addEntityItem(new EntityWolf(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.bone));
-    	EntityItemList.addEntityItem(new EntityOcelot(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.fishRaw));
-    	EntityItemList.addEntityItem(new EntitySnowman(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.snowball));
-    	EntityItemList.addEntityItem(new EntityVillager(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.leather));
-    	EntityItemList.addEntityItem(new EntityArrow(ModLoader.getMinecraftInstance().theWorld), new ItemStack(Item.arrow));
     }
     public boolean classExists (String className)
     {
@@ -126,7 +102,7 @@ public class mod_MoreRed extends BaseMod
     	
     	if(classExists("mod_IC2")) 
         {
-            IC2Handler.loadRecipies();
+            //IC2Handler.loadRecipies();
         }
     	//Redstone Chunk
         ModLoader.addName(rsChunk, "Redstone Chunk");
@@ -179,6 +155,10 @@ public class mod_MoreRed extends BaseMod
         //Screwdriver
         ModLoader.addName(screwdriver, "Screwdriver");
         ModLoader.addRecipe(new ItemStack(screwdriver, 1), new Object[] {"IO", "IO", 'I', Item.ingotIron});
+        //Redstone Chest
+        ModLoader.registerBlock(rsChest); 
+        ModLoader.addName(new ItemStack(rsChest), "Redstone Chest");
+        ModLoader.addRecipe(new ItemStack(rsChest, 1), new Object[] {"ORO", "RCR", "RRR", 'R', rsIngot, 'C', Block.chest});
     }
     public String getVersion()
     {

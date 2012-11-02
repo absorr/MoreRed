@@ -7,7 +7,7 @@ public class MoreItems extends Item
     {
          super(i);
          maxStackSize = stack;
-         this.setTabToDisplayOn(tab);
+         this.setCreativeTab(CreativeTabs.tabMisc);
     }
 
 	@Override

@@ -13,11 +13,11 @@ public class BlockRedChest extends Block
 {
 	private Random random = new Random();
 
-    protected BlockRedChest(int par1)
+    public BlockRedChest(int par1)
     {
         super(par1, Material.iron);
         this.blockIndexInTexture = 11;
-        this.setCreativeTab(CreativeTabs.tabDeco);
+        this.setCreativeTab(CreativeTabs.tabDecorations);
     }
     
     @Override

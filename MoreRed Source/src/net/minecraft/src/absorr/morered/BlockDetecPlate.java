@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Random;
 import net.minecraft.src.*;
 
-public class BlockPlate extends Block
+public class BlockDetecPlate extends BlockContainer
 {
     /** The mob type that can trigger this pressure plate. */
     private EnumMobType triggerMobType;
 
-    protected BlockPlate(int par1, int par2, EnumMobType par3EnumMobType, Material par4Material)
+    protected BlockDetecPlate(int par1, int par2, EnumMobType par3EnumMobType, Material par4Material)
     {
         super(par1, par2, par4Material);
         this.triggerMobType = par3EnumMobType;
@@ -243,4 +243,9 @@ public class BlockPlate extends Block
     {
         return 1;
     }
+
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		return new TileEntityDetecPlate();
+	}
 }

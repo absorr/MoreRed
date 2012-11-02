@@ -42,75 +42,45 @@ public class ContainerScanner extends Container
     /**
      * Called to transfer a stack from one inventory to the other eg. when shift clicking.
      */
-    public ItemStack transferStackInSlot(int par1)
+    public ItemStack func_82846_b(EntityPlayer par1EntityPlayer, int par2)
     {
-        ItemStack var2 = null;
-        Slot var3 = (Slot)this.inventorySlots.get(par1);
+        ItemStack var3 = null;
+        Slot var4 = (Slot)this.inventorySlots.get(par2);
 
-        if (var3 != null && var3.getHasStack())
+        if (var4 != null && var4.getHasStack())
         {
-            ItemStack var4 = var3.getStack();
-            var2 = var4.copy();
+            ItemStack var5 = var4.getStack();
+            var3 = var5.copy();
 
-            if (par1 == 2)
+            if (par2 < 9)
             {
-                if (!this.mergeItemStack(var4, 3, 39, true))
-                {
-                    return null;
-                }
-
-                var3.onSlotChange(var4, var2);
-            }
-            else if (par1 != 1 && par1 != 0)
-            {
-                if (FurnaceRecipes.smelting().getSmeltingResult(var4) != null)
-                {
-                    if (!this.mergeItemStack(var4, 0, 1, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (TileEntityFurnace.isItemFuel(var4))
-                {
-                    if (!this.mergeItemStack(var4, 1, 2, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (par1 >= 3 && par1 < 30)
-                {
-                    if (!this.mergeItemStack(var4, 30, 39, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (par1 >= 30 && par1 < 39 && !this.mergeItemStack(var4, 3, 30, false))
+                if (!this.mergeItemStack(var5, 9, 45, true))
                 {
                     return null;
                 }
             }
-            else if (!this.mergeItemStack(var4, 3, 39, false))
+            else if (!this.mergeItemStack(var5, 0, 9, false))
             {
                 return null;
             }
 
-            if (var4.stackSize == 0)
+            if (var5.stackSize == 0)
             {
-                var3.putStack((ItemStack)null);
+                var4.putStack((ItemStack)null);
             }
             else
             {
-                var3.onSlotChanged();
+                var4.onSlotChanged();
             }
 
-            if (var4.stackSize == var2.stackSize)
+            if (var5.stackSize == var3.stackSize)
             {
                 return null;
             }
 
-            var3.onPickupFromSlot(var4);
+            var4.func_82870_a(par1EntityPlayer, var5);
         }
 
-        return var2;
+        return var3;
     }
 }

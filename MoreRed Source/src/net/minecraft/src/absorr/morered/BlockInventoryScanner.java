@@ -1,8 +1,6 @@
 package net.minecraft.src.absorr.morered;
 import net.minecraft.src.*;
-import net.minecraft.src.absorr.morecrafts.*;
-import net.minecraft.src.absorr.morered.GuiScanner;
-import net.minecraft.src.absorr.morered.TileEntityScanner;
+import net.minecraft.src.absorr.morered.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,11 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
 public class BlockInventoryScanner extends BlockContainer
 {
 	private EnumMobType triggerMobType;
-	private boolean isActive = false;
 	public BlockInventoryScanner(int i, int j) 
     { 
         super(i, j, Material.iron);   
@@ -35,26 +31,14 @@ public class BlockInventoryScanner extends BlockContainer
 	}
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
     {
-		if (!isActive)
-        {
-                return 6;
-        }
-        else
+		if (j == 1 || j == 101)
         {
                 return 7;
         }
-    }
-
-    public int getBlockTextureFromSide(int i)
-    {
-            if (!isActive)
-            {
-                    return 6;
-            }
-            else
-            {
-                    return 7;
-            }
+        else
+        {
+                return 6;
+        }
     }
     public int idDropped(int i, Random random) 
     { 
@@ -107,18 +91,17 @@ public class BlockInventoryScanner extends BlockContainer
             	{
             		this.scanInventory(par1World, par2, par3, par4, (EntityPlayer) par5Entity);
             	}
-            	else
+            	/**else
             	{
-            		EntityLiving entity = (EntityLiving) par5Entity;
-            		if (entity.getHeldItem() != null)
-            			this.scanForItem(par1World, par2, par3, par4, entity.getHeldItem());
-            	}
+            		ItemStack item = EntityItemList.getEntityItem(par5Entity);
+            		this.scanForItem(par1World, par2, par3, par4, item);
+            	}**/
             }
         }
     }
     private void scanInventory(World par1World, int par2, int par3, int par4, EntityPlayer player)
     {
-        boolean var5 = isActive;
+        boolean var5 = par1World.getBlockMetadata(par2, par3, par4) == 101 || par1World.getBlockMetadata(par2, par3, par4) == 1;
         boolean var6 = false;
         float var7 = 0.125F;
         List var8 = null;
@@ -142,7 +125,7 @@ public class BlockInventoryScanner extends BlockContainer
         boolean var11s8;
         boolean var11s9;
         boolean var12 = false;
-        String mode = GuiScanner.getMode(par2, par3, par4);
+        String mode = GuiScanner.getMode(par2, par3, par4, par1World);
         
         if (mode=="OR")
         {
@@ -429,11 +412,22 @@ public class BlockInventoryScanner extends BlockContainer
         
         if (var12)
         {
-        	this.isActive = true;
+        	if (par1World.getBlockMetadata(par2, par3, par4) == 100)
+        		par1World.setBlockMetadata(par2, par3, par4, 101);
+        	else
+        		par1World.setBlockMetadata(par2, par3, par4, 1);
         	par1World.markBlocksDirty(par2, par3, par4, par2, par3, par4);
         	par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate());
+        	par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
+        	System.out.println("Metadata is " + par1World.getBlockMetadata(par2, par3, par4));
         }
-        else {this.isActive = false;}
+        else 
+        {
+        	if (par1World.getBlockMetadata(par2, par3, par4) == 101)
+        		par1World.setBlockMetadata(par2, par3, par4, 100);
+        	if (par1World.getBlockMetadata(par2, par3, par4) == 1)
+        		par1World.setBlockMetadata(par2, par3, par4, 0);;
+    	}
     }
     public void scanForItem (World par1World, int par2, int par3, int par4, ItemStack par5)
     {
@@ -461,7 +455,7 @@ public class BlockInventoryScanner extends BlockContainer
         boolean var11s8;
         boolean var11s9;
         boolean var12 = false;
-        String mode = GuiScanner.getMode(par2, par3, par4);
+        String mode = GuiScanner.getMode(par2, par3, par4, par1World);
         int inputID = par5.itemID;
 
         if (mode=="OR")
@@ -739,7 +733,6 @@ public class BlockInventoryScanner extends BlockContainer
                 if (var11s1 && var11s2 && var11s3 && var11s4 && var11s5 && var11s6 && var11s7 && var11s8 && var11s9)
                 {
                 	var12 = true;
-                	//System.out.println("Scanner will activate");
                 }
         	}
         }
@@ -749,25 +742,33 @@ public class BlockInventoryScanner extends BlockContainer
         
         if (var12)
         {
-        	par1World.setBlockMetadataWithNotify(par2, par3, par4, 1);
+        	if (par1World.getBlockMetadata(par2, par3, par4) == 100)
+        		par1World.setBlockMetadataWithNotify(par2, par3, par4, 101);
+        	if (par1World.getBlockMetadata(par2, par3, par4) == 0)
+        		par1World.setBlockMetadataWithNotify(par2, par3, par4, 1);
         	par1World.markBlocksDirty(par2, par3, par4, par2, par3, par4);
         	par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate());
+        	par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
+        	par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
+        	System.out.println("Metadata is " + par1World.getBlockMetadata(par2, par3, par4));
         }
-        else {par1World.setBlockMetadataWithNotify(par2, par3, par4, 0);}
+        else 
+        {
+        	if (par1World.getBlockMetadata(par2, par3, par4) == 101)
+        		par1World.setBlockMetadata(par2, par3, par4, 100);
+        	if (par1World.getBlockMetadata(par2, par3, par4) == 1)
+        		par1World.setBlockMetadata(par2, par3, par4, 0);;
+    	}
     }
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
-        if (!par1World.isRemote)
-        {
-            if (this.isActive)
-            {
-            	this.isActive = false;
-            }
-        }
-        if (par1World.getBlockMetadata(par2, par3, par4) == 1)
-        {
-        	this.setBlockBounds(0F, 0F, 0.5F, 0.5F, 2F, 1F);
-        }
+    	if (par1World.getBlockMetadata(par2, par3, par4) == 101)
+    		par1World.setBlockMetadata(par2, par3, par4, 100);
+    	if (par1World.getBlockMetadata(par2, par3, par4) == 1)
+    		par1World.setBlockMetadata(par2, par3, par4, 0);
+    	else
+    		par1World.setBlockMetadata(par2, par3, par4, 0);
+    	par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
     }
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z,EntityPlayer player, int par6, float par7, float par8, float par9)
@@ -785,29 +786,45 @@ public class BlockInventoryScanner extends BlockContainer
     {
             itemList.add(new ItemStack(this));
     }
+
+    /**
+     * Can this block provide power. Only wire currently seems to have this change based on its state.
+     */
+    @Override
+    public boolean canProvidePower()
+    {
+        return true;
+    }
+    
+
     /**
      * Is this block powering the block on the specified side
      */
+    @Override
     public boolean isPoweringTo(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
-        return isActive;
+    	return par1IBlockAccess.getBlockMetadata(par2, par3, par4) == 1 || par1IBlockAccess.getBlockMetadata(par2, par3, par4) == 101;
     }
 
     /**
      * Is this block indirectly powering the block on the specified side
      */
-    public boolean isIndirectlyPoweringTo(World par1World, int par2, int par3, int par4, int par5)
+    @Override
+    public boolean isIndirectlyPoweringTo(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
-        return isActive;
-    }
+        int var6 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
 
-    /**
-     * Can this block provide power. Only wire currently seems to have this change based on its state.
-     */
-    public boolean canProvidePower()
-    {
-        return true;
+        if ((var6 & 8) == 0 || (var6 & 8) == 100)
+        {
+            return false;
+        }
+        else
+        {
+            int var7 = var6 & 7;
+            return var7 == 5 && par5 == 1 ? true : (var7 == 4 && par5 == 2 ? true : (var7 == 3 && par5 == 3 ? true : (var7 == 2 && par5 == 4 ? true : var7 == 1 && par5 == 5)));
+        }
     }
+    
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		return new TileEntityScanner();
@@ -829,12 +846,12 @@ public class BlockInventoryScanner extends BlockContainer
 
             if (Block.opaqueCubeLookup[var5] && !Block.opaqueCubeLookup[var6])
             {
-                var9 = 1;
+                var9 = 100;
             }
 
             if (Block.opaqueCubeLookup[var6] && !Block.opaqueCubeLookup[var5])
             {
-                var9 = 1;
+                var9 = 100;
             }
 
             if (Block.opaqueCubeLookup[var7] && !Block.opaqueCubeLookup[var8])
@@ -848,9 +865,13 @@ public class BlockInventoryScanner extends BlockContainer
             }
 
             par1World.setBlockMetadataWithNotify(par2, par3, par4, var9);
-            if (par1World.getBlockMetadata(par2, par3, par4) == 1)
+            if (par1World.getBlockMetadata(par2, par3, par4) == 101)
             {
-            	this.setBlockBounds(0F, 0F, 0.5F, 0.5F, 2F, 1F);
+            	this.setBlockBounds(0F, 0F, 0.5F, 1F, 2F, 1F);
+            }
+            if (par1World.getBlockMetadata(par2, par3, par4) == 100)
+            {
+            	this.setBlockBounds(0F, 0F, 0.5F, 1F, 2F, 1F);
             }
         }
     }
@@ -860,7 +881,7 @@ public class BlockInventoryScanner extends BlockContainer
 
         if (var6 == 0)
         {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 1);
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 100);
         }
 
         if (var6 == 1)
@@ -870,17 +891,20 @@ public class BlockInventoryScanner extends BlockContainer
 
         if (var6 == 2)
         {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 1);
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 100);
         }
 
         if (var6 == 3)
         {
             par1World.setBlockMetadataWithNotify(par2, par3, par4, 0);
         }
-        
-        if (par1World.getBlockMetadata(par2, par3, par4) == 1)
+        if (par1World.getBlockMetadata(par2, par3, par4) == 101)
         {
-        	this.setBlockBounds(0F, 0F, 0.5F, 0.5F, 2F, 1F);
+        	this.setBlockBounds(0F, 0F, 0.5F, 1F, 2F, 1F);
+        }
+        if (par1World.getBlockMetadata(par2, par3, par4) == 100)
+        {
+        	this.setBlockBounds(0F, 0F, 0.5F, 1F, 2F, 1F);
         }
     }
 }

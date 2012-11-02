@@ -18,7 +18,7 @@ public class BlockToolCharger extends Block
 	@Override
 	public String getTextureFile() 
 	{
-		return "/morecrafts/blocks.png";
+		return "/morered/blocks.png";
 	}
     public int idDropped(int i, Random random) 
     { 

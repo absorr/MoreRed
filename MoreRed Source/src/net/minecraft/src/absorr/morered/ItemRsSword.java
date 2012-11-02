@@ -15,7 +15,7 @@ public class ItemRsSword extends Item
         this.maxStackSize = 1;
         this.setMaxDamage(par2EnumToolMaterial.getMaxUses());
         this.weaponDamage = 4 + par2EnumToolMaterial.getDamageVsEntity();
-        this.setTabToDisplayOn(CreativeTabs.tabTools);
+        this.setCreativeTab(CreativeTabs.tabCombat);
     }
     @Override
 	public String getTextureFile() 

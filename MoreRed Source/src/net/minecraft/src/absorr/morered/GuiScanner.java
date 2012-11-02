@@ -54,22 +54,23 @@ public class GuiScanner extends GuiContainer
         int intX = this.invFurnaceInventory.xCoord;
     	int intY = this.invFurnaceInventory.yCoord;
     	int intZ = this.invFurnaceInventory.zCoord;
-        controlList.add(buttonName = new GuiButton(1, width / 2 + 17, height / 2 - 50, 20, 20, getMode(intX, intY, intZ)));
+        controlList.add(buttonName = new GuiButton(1, width / 2 + 17, height / 2 - 50, 20, 20, getMode(intX, intY, intZ, ModLoader.getMinecraftInstance().theWorld)));
     }
     
-    public static String getMode(int x, int y, int z)
+    public static String getMode(int x, int y, int z, World world)
     {
     	try {
-			ModLoader.getMinecraftInstance().theWorld.checkSessionLock();
+			world.checkSessionLock();
 		} catch (MinecraftException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	boolean moder = false;
     	try {
-    		File file = new File ("" + ModLoader.getMinecraftInstance().getMinecraftDir() + "/saves/" + ModLoader.getMinecraftInstance().theWorld.getSaveHandler().getSaveDirectoryName() + "","morecrafts.dat");
+    		File file = new File ("" + ModLoader.getMinecraftInstance().getMinecraftDir() + "/saves/" + world.getSaveHandler().getSaveDirectoryName() + "","morecrafts.dat");
     	if (!file.exists()) {
-    		
+    		setMode(true, x, y, z, world);
+    		return "AND";
     	}
     	FileInputStream fileinputstream = new FileInputStream(file);
     	NBTTagCompound nbttagcompound = CompressedStreamTools.readCompressed(fileinputstream);
@@ -84,20 +85,39 @@ public class GuiScanner extends GuiContainer
     	if (moder) return "AND";
     	else return "OR";
     }
+    
+    private static void setMode(boolean par1, int intX, int intY, int intZ, World world) {
+    	try {
+    	File file = new File(ModLoader.getMinecraftInstance().getMinecraftDir() + "/saves/" + world.getSaveHandler().getSaveDirectoryName() + "","morecrafts.dat");
+    	System.out.println("FILE: " + file);
+    	if (!file.exists()) {
+    	file.createNewFile();
+    	}
+    	FileOutputStream fileoutputstream = new FileOutputStream(file);
+    	NBTTagCompound nbttagcompound = new NBTTagCompound();
+    	nbttagcompound.setBoolean("mode" + intX + intY + intZ, par1);
+
+    	CompressedStreamTools.writeCompressed(nbttagcompound, fileoutputstream);
+    	fileoutputstream.close();
+    	}
+    	catch(Exception exception) {
+    	exception.printStackTrace();
+    	}
+    }
 
 
     protected void actionPerformed(GuiButton guibutton)
     {
-       readNBTFromFile();
+       this.readNBTFromFile();
        if(mode == false)
        {
     	   buttonName.displayString = "AND";
-    	   writeNBTToFile(true);
+    	   this.writeNBTToFile(true);
        }
        else
        {
     	   buttonName.displayString = "OR";
-    	   writeNBTToFile(false);
+    	   this.writeNBTToFile(false);
        }
     }
     
@@ -120,7 +140,7 @@ public class GuiScanner extends GuiContainer
     	catch(Exception exception) {
     	exception.printStackTrace();
     	}
-    	}
+    }
 
     private void readNBTFromFile() {
     	try {
