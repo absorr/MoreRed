@@ -1,7 +1,5 @@
 package net.minecraft.src;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.src.absorr.morered.*;
 //import net.minecraft.src.absorr.morered.external.IC2Handler;
 import net.minecraftforge.client.*;
 import net.minecraftforge.common.*;
@@ -12,79 +10,47 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import cpw.mods.fml.common.*;
+import cpw.mods.fml.common.network.NetworkMod;
+import absorr.morered.base.*;
+import absorr.morered.materials.*;
+
+@Mod(modid="MoreRed", name="MoreRed", version="Build 007")
+@NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class mod_MoreRed extends BaseMod
 {
-	static EnumToolMaterial toolOBSIDIAN = EnumHelper.addToolMaterial("OBSIDIAN", 3, 1000, 13F, 3, 22);
-	//Creates the configuration integers
-	static Configuration configuration = new Configuration(new File(Minecraft.getMinecraftDir(), "config/MoreRed.cfg"));
-	static int rechargeID = configurationProperties();
-	static int scannerID;
-	static int ironButtonID;
-	static int rsChestID;
-    static int rsChunkID;
-    static int rsIngotID;
-    static int rsPickID;
-    static int rsSpadeID;
-    static int rsHoeID;
-    static int rsAxeID;
-    static int rsSwordID;
-    static int rsMultiID;
-    static int crowbarID;
-    static int screwdriverID;
-    public static int configurationProperties()
-    {
-            configuration.load();
-            rechargeID = Integer.parseInt(configuration.getBlock("Tool_Recharging_Station", 190).value);
-            scannerID = Integer.parseInt(configuration.getBlock("Inventory_Scanner", Configuration.CATEGORY_BLOCK, 193).value);
-            ironButtonID = Integer.parseInt(configuration.getBlock("Iron_Button", Configuration.CATEGORY_BLOCK, 194).value);
-            rsChestID = Integer.parseInt(configuration.getBlock("Redstone_Chest", Configuration.CATEGORY_BLOCK, 195).value);
-            rsChunkID = Integer.parseInt(configuration.getItem("Redstone_Chunk", Configuration.CATEGORY_ITEM, 5980).value);
-            rsIngotID = Integer.parseInt(configuration.getItem("Redstone_Ingot", Configuration.CATEGORY_ITEM, 5981).value);
-            rsPickID = Integer.parseInt(configuration.getItem("Redstone_Pickaxe", Configuration.CATEGORY_ITEM, 5983).value);
-            rsSpadeID = Integer.parseInt(configuration.getItem("Redstone_Shovel", Configuration.CATEGORY_ITEM, 5984).value);
-            rsHoeID = Integer.parseInt(configuration.getItem("Redstone_Hoe", Configuration.CATEGORY_ITEM, 5985).value);
-            rsAxeID = Integer.parseInt(configuration.getItem("Redstone_Axe", Configuration.CATEGORY_ITEM, 5986).value);
-            rsSwordID = Integer.parseInt(configuration.getItem("Redstone_Sword", Configuration.CATEGORY_ITEM, 5987).value);
-            rsMultiID = Integer.parseInt(configuration.getItem("Redstone_Multi_Tool", Configuration.CATEGORY_ITEM, 5988).value);
-            crowbarID = Integer.parseInt(configuration.getItem("Crowbar", Configuration.CATEGORY_ITEM, 5999).value);
-            screwdriverID = Integer.parseInt(configuration.getItem("Screwdriver", Configuration.CATEGORY_ITEM, 6000).value);
-            configuration.save();
-            return rechargeID;
-    }
+	@SidedProxy(clientSide = "absorr.morered.base.ClientProxy", serverSide = "absorr.morered.base.CommonProxy", bukkitSide = "absorr.morered.base.CommonProxy")
+	public static CommonProxy proxy;
 	
 	//Creates the items and blocks
-    public static final Item rsChunk = new MoreItems(rsChunkID, 64, CreativeTabs.tabMaterials).setItemName("redstoneChunk").setIconIndex(2);
-    public static final Item rsIngot = new MoreItems(rsIngotID, 64, CreativeTabs.tabMaterials).setItemName("redstoneIngot").setIconIndex(3);
-    public static final Item rsPick = new MoreItems(rsPickID, 1, CreativeTabs.tabTools).setItemName("redstonePickaxe").setIconIndex(4);
-    public static final Item rsSpade = new MoreItems(rsSpadeID, 1, CreativeTabs.tabTools).setItemName("redstoneShovel").setIconIndex(5);
-    public static final Item rsHoe = new ItemHoe(rsHoeID, EnumToolMaterial.IRON).setItemName("redstoneHoe").setIconIndex(6);
-    public static final Item rsAxe = new MoreItems(rsAxeID, 1, CreativeTabs.tabTools).setItemName("redstoneAxe").setIconIndex(7);
-    public static final Item rsSword = new ItemRsSword(rsSwordID, EnumToolMaterial.IRON).setItemName("redstoneSword").setIconIndex(8);
-    public static final Item rsMulti = new ItemMultiTool(rsMultiID, 1, EnumToolMaterial.IRON).setItemName("redstoneMultitool").setIconIndex(14);
-    public static final Item crowbar = new MoreItems(crowbarID, 1, CreativeTabs.tabTools).setItemName("crowbar").setIconIndex(16);
-    public static final Item screwdriver = new MoreItems(screwdriverID, 1, CreativeTabs.tabTools).setItemName("screwdriver").setIconIndex(1);
-    public static Block recharger = new BlockToolCharger(rechargeID, 0).setHardness(1.0F).setResistance(6000.0F).setLightValue(1.0F).setBlockName("Tool Recharging Station"); 
-    public static Block invScanner = new BlockInventoryScanner(scannerID, 6).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Inventory Scanner"); 
-    public static Block ironButton = new BlockIronButton(ironButtonID, 22).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Iron Button"); 
-    public static Block rsChest = new BlockRedChest(rsChestID).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Redstone Chest"); 
+    public static final Item rsChunk = new MoreItems(Config.rsChunkID, 64, CreativeTabs.tabMaterials).setItemName("redstoneChunk").setIconIndex(2);
+    public static final Item rsIngot = new MoreItems(Config.rsIngotID, 64, CreativeTabs.tabMaterials).setItemName("redstoneIngot").setIconIndex(3);
+    public static final Item rsPick = new MoreItems(Config.rsPickID, 1, CreativeTabs.tabTools).setItemName("redstonePickaxe").setIconIndex(4);
+    public static final Item rsSpade = new MoreItems(Config.rsSpadeID, 1, CreativeTabs.tabTools).setItemName("redstoneShovel").setIconIndex(5);
+    public static final Item rsHoe = new ItemRsHoe(Config.rsHoeID, EnumToolMaterial.IRON).setItemName("redstoneHoe").setIconIndex(6);
+    public static final Item rsAxe = new MoreItems(Config.rsAxeID, 1, CreativeTabs.tabTools).setItemName("redstoneAxe").setIconIndex(7);
+    public static final Item rsSword = new ItemRsSword(Config.rsSwordID, EnumToolMaterial.IRON).setItemName("redstoneSword").setIconIndex(8);
+    public static final Item rsMulti = new ItemMultiTool(Config.rsMultiID, 1, EnumToolMaterial.IRON).setItemName("redstoneMultitool").setIconIndex(14);
+    public static final Item crowbar = new MoreItems(Config.crowbarID, 1, CreativeTabs.tabTools).setItemName("crowbar").setIconIndex(16);
+    public static final Item screwdriver = new MoreItems(Config.screwdriverID, 1, CreativeTabs.tabTools).setItemName("screwdriver").setIconIndex(1);
+    public static Block recharger = new BlockToolCharger(Config.rechargeID, 0).setHardness(1.0F).setResistance(6000.0F).setLightValue(1.0F).setBlockName("Tool Recharging Station"); 
+    public static Block invScanner = new BlockInventoryScanner(Config.scannerID, 6).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Inventory Scanner"); 
+    public static Block ironButton = new BlockIronButton(Config.ironButtonID, 22).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Iron Button"); 
+    public static Block rsChest = new BlockRedChest(Config.rsChestID).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Redstone Chest"); 
+    public static Block detecPlate = new BlockDetecPlate(Config.detecID, 9, Material.rock).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Detection Plate"); 
     
     
     public void load()
     {
+    	proxy.addMerchantRecipies();
+    	proxy.registerRenderers();
+    	
     	MinecraftForge.setToolClass(rsPick, "pickaxe", 2);
     	MinecraftForge.setToolClass(rsSpade, "shovel", 2);
     	MinecraftForge.setToolClass(rsAxe, "axe", 2);
-    	MinecraftForgeClient.preloadTexture("/morered/items.png"); 
-  		MinecraftForgeClient.preloadTexture("/morered/blocks.png");
   		ModLoader.registerTileEntity(TileEntityScanner.class, "Inventory Scanner");
-  		ModLoader.registerTileEntity(TileEntityRedChest.class, "Redstone Chest");
+  		ModLoader.registerTileEntity(TileEntityDetecPlate.class, "Detection Plate");
     	EntityList.entityEggs.put(Integer.valueOf(63), new EntityEggInfo(63, 0, 9118312));
-    	
-    	//Villager Trading "Recipes"
-    	MerchantRecipeList npcTrade = new MerchantRecipeList();
-    	npcTrade.addToListWithCheck(new MerchantRecipe (new ItemStack (Item.emerald, 4), new ItemStack (rsMulti, 1)));
-    	npcTrade.addToListWithCheck(new MerchantRecipe (new ItemStack (Item.emerald, 4), new ItemStack (rsIngot, 3)));
-    	npcTrade.addToListWithCheck(new MerchantRecipe (new ItemStack (rsIngot, 3), new ItemStack (Item.emerald, 1)));
     }
     public boolean classExists (String className)
     {
@@ -123,7 +89,6 @@ public class mod_MoreRed extends BaseMod
         ModLoader.addName(rsSpade, "Redstone Shovel");
         ModLoader.addRecipe(new ItemStack(rsSpade, 1), new Object[] {"ORO", "OSO", "OSO", 'R', rsIngot, 'S', Item.stick});
         //Redstone Hoe
-        rsHoe.iconIndex = ModLoader.addOverride("/gui/items.png", "/morecrafts/rshoe.png");
         ModLoader.addName(rsHoe, "Redstone Hoe");
         ModLoader.addRecipe(new ItemStack(rsHoe, 1), new Object[] {"ORR", "OSO", "OSO", 'R', rsIngot, 'S', Item.stick});
         ModLoader.addRecipe(new ItemStack(rsHoe, 1), new Object[] {"RRO", "OSO", "OSO", 'R', rsIngot, 'S', Item.stick});
@@ -159,6 +124,10 @@ public class mod_MoreRed extends BaseMod
         ModLoader.registerBlock(rsChest); 
         ModLoader.addName(new ItemStack(rsChest), "Redstone Chest");
         ModLoader.addRecipe(new ItemStack(rsChest, 1), new Object[] {"ORO", "RCR", "RRR", 'R', rsIngot, 'C', Block.chest});
+        //Detection Plate
+        ModLoader.registerBlock(detecPlate); 
+        ModLoader.addName(new ItemStack(detecPlate), "Detection Plate");
+        ModLoader.addRecipe(new ItemStack(detecPlate), new Object[] {"CRC", "RER", "CBC", 'R', rsIngot, 'B', Block.brick, 'C', Item.brick, 'E', Item.enderPearl});
     }
     public String getVersion()
     {
