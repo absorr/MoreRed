@@ -1,23 +1,31 @@
-package net.minecraft.src.absorr.morered;
+package absorr.morered.materials;
 
 import java.util.List;
 import java.util.Random;
+
+import absorr.morered.base.CommonProxy;
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
 import net.minecraft.src.*;
 
 public class BlockDetecPlate extends BlockContainer
 {
-    /** The mob type that can trigger this pressure plate. */
-    private EnumMobType triggerMobType;
 
-    protected BlockDetecPlate(int par1, int par2, EnumMobType par3EnumMobType, Material par4Material)
+    public BlockDetecPlate(int par1, int par2, Material par4Material)
     {
         super(par1, par2, par4Material);
-        this.triggerMobType = par3EnumMobType;
         this.setCreativeTab(CreativeTabs.tabRedstone);
         this.setTickRandomly(true);
         float var5 = 0.0625F;
         this.setBlockBounds(var5, 0.0F, var5, 1.0F - var5, 0.03125F, 1.0F - var5);
     }
+    
+    @SideOnly(Side.CLIENT)
+	@Override
+	public String getTextureFile() 
+	{
+		return CommonProxy.blockPic;
+	}
 
     /**
      * How many world ticks before ticking
@@ -95,7 +103,7 @@ public class BlockDetecPlate extends BlockContainer
         {
             if (par1World.getBlockMetadata(par2, par3, par4) != 0)
             {
-                this.setStateIfMobInteractsWithPlate(par1World, par2, par3, par4);
+                this.setStateIfMobInteractsWithPlate(par1World, par2, par3, par4, false);
             }
         }
     }
@@ -107,9 +115,15 @@ public class BlockDetecPlate extends BlockContainer
     {
         if (!par1World.isRemote)
         {
+        	TileEntityDetecPlate tile = (TileEntityDetecPlate) par1World.getBlockTileEntity(par2, par3, par4);
+        	int slot1 = tile.getStackInSlot(0).getItemDamage();
+        	int slot2 = tile.getStackInSlot(1).getItemDamage();
+        	int slot3 = tile.getStackInSlot(2).getItemDamage();
             if (par1World.getBlockMetadata(par2, par3, par4) != 1)
             {
-                this.setStateIfMobInteractsWithPlate(par1World, par2, par3, par4);
+            	int entID = par5Entity.entityId;
+            	if (entID == slot1 || entID == slot2 || entID == slot3)
+            		this.setStateIfMobInteractsWithPlate(par1World, par2, par3, par4, true);
             }
         }
     }
@@ -117,32 +131,11 @@ public class BlockDetecPlate extends BlockContainer
     /**
      * Checks if there are mobs on the plate. If a mob is on the plate and it is off, it turns it on, and vice versa.
      */
-    private void setStateIfMobInteractsWithPlate(World par1World, int par2, int par3, int par4)
+    private void setStateIfMobInteractsWithPlate(World par1World, int par2, int par3, int par4, boolean var6)
     {
         boolean var5 = par1World.getBlockMetadata(par2, par3, par4) == 1;
-        boolean var6 = false;
         float var7 = 0.125F;
         List var8 = null;
-
-        if (this.triggerMobType == EnumMobType.everything)
-        {
-            var8 = par1World.getEntitiesWithinAABBExcludingEntity((Entity)null, AxisAlignedBB.getAABBPool().addOrModifyAABBInPool((double)((float)par2 + var7), (double)par3, (double)((float)par4 + var7), (double)((float)(par2 + 1) - var7), (double)par3 + 0.25D, (double)((float)(par4 + 1) - var7)));
-        }
-
-        if (this.triggerMobType == EnumMobType.mobs)
-        {
-            var8 = par1World.getEntitiesWithinAABB(EntityLiving.class, AxisAlignedBB.getAABBPool().addOrModifyAABBInPool((double)((float)par2 + var7), (double)par3, (double)((float)par4 + var7), (double)((float)(par2 + 1) - var7), (double)par3 + 0.25D, (double)((float)(par4 + 1) - var7)));
-        }
-
-        if (this.triggerMobType == EnumMobType.players)
-        {
-            var8 = par1World.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getAABBPool().addOrModifyAABBInPool((double)((float)par2 + var7), (double)par3, (double)((float)par4 + var7), (double)((float)(par2 + 1) - var7), (double)par3 + 0.25D, (double)((float)(par4 + 1) - var7)));
-        }
-
-        if (!var8.isEmpty())
-        {
-            var6 = true;
-        }
 
         if (var6 && !var5)
         {
@@ -248,4 +241,16 @@ public class BlockDetecPlate extends BlockContainer
 	public TileEntity createNewTileEntity(World var1) {
 		return new TileEntityDetecPlate();
 	}
+	
+	@SideOnly(Side.CLIENT)
+    public boolean onBlockActivated(World world, int x, int y, int z,EntityPlayer player, int par6, float par7, float par8, float par9)
+    {
+    	TileEntityDetecPlate var6 = (TileEntityDetecPlate)world.getBlockTileEntity(x, y, z);
+        if (var6 != null)
+        {
+            ModLoader.openGUI(player, new GuiDetecPlate(player.inventory, var6));
+        }
+
+        return true;
+    }
 }

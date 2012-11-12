@@ -1,11 +1,10 @@
-package net.minecraft.src.absorr.morered;
+package absorr.morered.materials;
 import static net.minecraftforge.common.ForgeDirection.EAST;
 import static net.minecraftforge.common.ForgeDirection.NORTH;
 import static net.minecraftforge.common.ForgeDirection.SOUTH;
 import static net.minecraftforge.common.ForgeDirection.WEST;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
-import net.minecraft.src.absorr.morecrafts.*;
 import net.minecraftforge.client.*;
 import net.minecraftforge.common.*;
 
@@ -18,6 +17,8 @@ import java.io.DataOutput;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+
+import absorr.morecrafts.materials.*;
 
 
 import net.minecraftforge.common.*;

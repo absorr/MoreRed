@@ -1,7 +1,8 @@
-package net.minecraft.src.absorr.morered;
+package absorr.morered.materials;
 
+import absorr.morecrafts.materials.*;
+import absorr.morered.base.CommonProxy;
 import net.minecraft.src.*;
-import net.minecraft.src.absorr.morecrafts.*;
 
 public class ItemRsSword extends Item
 {
@@ -20,7 +21,7 @@ public class ItemRsSword extends Item
     @Override
 	public String getTextureFile() 
 	{
-		return "/morecrafts/items.png";
+		return CommonProxy.itemPic;
 	}
 
     /**

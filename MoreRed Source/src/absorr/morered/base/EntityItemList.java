@@ -1,4 +1,4 @@
-package net.minecraft.src.absorr.morered;
+package absorr.morered.base;
 
 import net.minecraft.src.*;
 

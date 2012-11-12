@@ -1,6 +1,5 @@
-package net.minecraft.src.absorr.morered;
+package absorr.morered.materials;
 import net.minecraft.src.*;
-import net.minecraft.src.absorr.morered.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,6 +7,12 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import absorr.morered.base.CommonProxy;
+import absorr.morered.materials.*;
+
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
 
 public class BlockInventoryScanner extends BlockContainer
 {
@@ -24,11 +29,13 @@ public class BlockInventoryScanner extends BlockContainer
     {
         return 1;
     }
+	@SideOnly(Side.CLIENT)
 	@Override
 	public String getTextureFile() 
 	{
-		return "/morered/blocks.png";
+		return CommonProxy.blockPic;
 	}
+	@SideOnly(Side.CLIENT)
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
     {
 		if (j == 1 || j == 101)
@@ -750,7 +757,6 @@ public class BlockInventoryScanner extends BlockContainer
         	par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate());
         	par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
         	par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
-        	System.out.println("Metadata is " + par1World.getBlockMetadata(par2, par3, par4));
         }
         else 
         {
@@ -771,6 +777,8 @@ public class BlockInventoryScanner extends BlockContainer
     	par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
     }
     @Override
+    
+    @SideOnly(Side.CLIENT)
     public boolean onBlockActivated(World world, int x, int y, int z,EntityPlayer player, int par6, float par7, float par8, float par9)
     {
     	TileEntityScanner var6 = (TileEntityScanner)world.getBlockTileEntity(x, y, z);

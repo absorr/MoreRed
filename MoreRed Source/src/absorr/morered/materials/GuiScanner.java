@@ -1,12 +1,13 @@
-package net.minecraft.src.absorr.morered;
+package absorr.morered.materials;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 import net.minecraft.src.*;
-import net.minecraft.src.absorr.morecrafts.*;
 
 import org.lwjgl.opengl.GL11;
+
+import absorr.morecrafts.materials.*;
 
 
 public class GuiScanner extends GuiContainer

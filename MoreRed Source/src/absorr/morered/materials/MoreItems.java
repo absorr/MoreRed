@@ -1,4 +1,5 @@
-package net.minecraft.src.absorr.morered;
+package absorr.morered.materials;
+import absorr.morered.base.CommonProxy;
 import net.minecraft.src.*;
 
 public class MoreItems extends Item
@@ -13,6 +14,6 @@ public class MoreItems extends Item
 	@Override
 	public String getTextureFile() 
 	{
-		return "/morecrafts/items.png";
+		return CommonProxy.itemPic;
 	}
 }

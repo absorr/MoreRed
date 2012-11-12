@@ -1,9 +1,11 @@
-package net.minecraft.src.absorr.morered;
+package absorr.morered.materials;
 import net.minecraft.src.*;
-import net.minecraft.src.absorr.morecrafts.*;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import absorr.morecrafts.materials.*;
+import absorr.morered.base.CommonProxy;
 
 
 public class BlockToolCharger extends Block
@@ -18,7 +20,7 @@ public class BlockToolCharger extends Block
 	@Override
 	public String getTextureFile() 
 	{
-		return "/morered/blocks.png";
+		return CommonProxy.blockPic;
 	}
     public int idDropped(int i, Random random) 
     { 

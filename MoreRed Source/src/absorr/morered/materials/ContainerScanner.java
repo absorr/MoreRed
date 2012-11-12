@@ -1,7 +1,7 @@
-package net.minecraft.src.absorr.morered;
+package absorr.morered.materials;
 
+import absorr.morecrafts.materials.*;
 import net.minecraft.src.*;
-import net.minecraft.src.absorr.morecrafts.*;
 
 public class ContainerScanner extends Container
 {
@@ -23,13 +23,13 @@ public class ContainerScanner extends Container
 
         for (var3 = 0; var3 < 3; ++var3)
         {
-            for (var4 = 0; var4 < 9; ++var4)
+            for (var4 = 0; var4 < 3; ++var4)
             {
                 this.addSlotToContainer(new Slot(par1InventoryPlayer, var4 + var3 * 9 + 9, 8 + var4 * 18, 84 + var3 * 18));
             }
         }
 
-        for (var3 = 0; var3 < 9; ++var3)
+        for (var3 = 0; var3 < 3; ++var3)
         {
             this.addSlotToContainer(new Slot(par1InventoryPlayer, var3, 8 + var3 * 18, 142));
         }

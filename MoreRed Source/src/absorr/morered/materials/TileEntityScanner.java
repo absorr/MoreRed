@@ -1,20 +1,26 @@
-package net.minecraft.src.absorr.morered;
+package absorr.morered.materials;
+import net.minecraft.src.*;
 
 import java.util.Random;
 
-import net.minecraft.src.*;
+import absorr.morecrafts.materials.*;
 
-public class TileEntityIronButton extends TileEntity implements IInventory
+
+public class TileEntityScanner extends TileEntity implements IInventory
 {
-    private ItemStack[] buttonContents = new ItemStack[1];
-    public int time = 0;
+    private ItemStack[] scannerContents = new ItemStack[9];
+
+    /**
+     * random number generator for instance. Used in random item stack selection.
+     */
+    private Random dispenserRandom = new Random();
 
     /**
      * Returns the number of slots in the inventory.
      */
     public int getSizeInventory()
     {
-        return 0;
+        return 9;
     }
 
     /**
@@ -22,7 +28,7 @@ public class TileEntityIronButton extends TileEntity implements IInventory
      */
     public ItemStack getStackInSlot(int par1)
     {
-        return this.buttonContents[par1];
+        return this.scannerContents[par1];
     }
 
     /**
@@ -31,24 +37,24 @@ public class TileEntityIronButton extends TileEntity implements IInventory
      */
     public ItemStack decrStackSize(int par1, int par2)
     {
-        if (this.buttonContents[par1] != null)
+        if (this.scannerContents[par1] != null)
         {
             ItemStack var3;
 
-            if (this.buttonContents[par1].stackSize <= par2)
+            if (this.scannerContents[par1].stackSize <= par2)
             {
-                var3 = this.buttonContents[par1];
-                this.buttonContents[par1] = null;
+                var3 = this.scannerContents[par1];
+                this.scannerContents[par1] = null;
                 this.onInventoryChanged();
                 return var3;
             }
             else
             {
-                var3 = this.buttonContents[par1].splitStack(par2);
+                var3 = this.scannerContents[par1].splitStack(par2);
 
-                if (this.buttonContents[par1].stackSize == 0)
+                if (this.scannerContents[par1].stackSize == 0)
                 {
-                    this.buttonContents[par1] = null;
+                    this.scannerContents[par1] = null;
                 }
 
                 this.onInventoryChanged();
@@ -67,10 +73,10 @@ public class TileEntityIronButton extends TileEntity implements IInventory
      */
     public ItemStack getStackInSlotOnClosing(int par1)
     {
-        if (this.buttonContents[par1] != null)
+        if (this.scannerContents[par1] != null)
         {
-            ItemStack var2 = this.buttonContents[par1];
-            this.buttonContents[par1] = null;
+            ItemStack var2 = this.scannerContents[par1];
+            this.scannerContents[par1] = null;
             return var2;
         }
         else
@@ -82,13 +88,35 @@ public class TileEntityIronButton extends TileEntity implements IInventory
     /**
      * gets stack of one item extracted from a stack chosen at random from the block inventory
      */
+    public ItemStack getRandomStackFromInventory()
+    {
+        int var1 = -1;
+        int var2 = 1;
+
+        for (int var3 = 0; var3 < this.scannerContents.length; ++var3)
+        {
+            if (this.scannerContents[var3] != null && this.dispenserRandom.nextInt(var2++) == 0)
+            {
+                var1 = var3;
+            }
+        }
+
+        if (var1 >= 0)
+        {
+            return this.decrStackSize(var1, 1);
+        }
+        else
+        {
+            return null;
+        }
+    }
 
     /**
      * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
      */
     public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
     {
-        this.buttonContents[par1] = par2ItemStack;
+        this.scannerContents[par1] = par2ItemStack;
 
         if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit())
         {
@@ -97,24 +125,13 @@ public class TileEntityIronButton extends TileEntity implements IInventory
 
         this.onInventoryChanged();
     }
-    
-    public void setTickTime(int var1)
-    {
-    	this.time = var1;
-    	this.onInventoryChanged();
-    }
-    
-    public int getTickTime()
-    {
-    	return this.time;
-    }
 
     /**
      * Returns the name of the inventory.
      */
     public String getInvName()
     {
-        return "Iron Button";
+        return "container.dispenser";
     }
 
     /**
@@ -124,19 +141,18 @@ public class TileEntityIronButton extends TileEntity implements IInventory
     {
         super.readFromNBT(par1NBTTagCompound);
         NBTTagList var2 = par1NBTTagCompound.getTagList("Items");
-        this.buttonContents = new ItemStack[this.getSizeInventory()];
+        this.scannerContents = new ItemStack[this.getSizeInventory()];
 
         for (int var3 = 0; var3 < var2.tagCount(); ++var3)
         {
             NBTTagCompound var4 = (NBTTagCompound)var2.tagAt(var3);
             int var5 = var4.getByte("Slot") & 255;
 
-            if (var5 >= 0 && var5 < this.buttonContents.length)
+            if (var5 >= 0 && var5 < this.scannerContents.length)
             {
-                this.buttonContents[var5] = ItemStack.loadItemStackFromNBT(var4);
+                this.scannerContents[var5] = ItemStack.loadItemStackFromNBT(var4);
             }
         }
-        this.time = par1NBTTagCompound.getShort("Time");
     }
 
     /**
@@ -145,16 +161,15 @@ public class TileEntityIronButton extends TileEntity implements IInventory
     public void writeToNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.writeToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setShort("Time", (short)this.time);
         NBTTagList var2 = new NBTTagList();
 
-        for (int var3 = 0; var3 < this.buttonContents.length; ++var3)
+        for (int var3 = 0; var3 < this.scannerContents.length; ++var3)
         {
-            if (this.buttonContents[var3] != null)
+            if (this.scannerContents[var3] != null)
             {
                 NBTTagCompound var4 = new NBTTagCompound();
                 var4.setByte("Slot", (byte)var3);
-                this.buttonContents[var3].writeToNBT(var4);
+                this.scannerContents[var3].writeToNBT(var4);
                 var2.appendTag(var4);
             }
         }

@@ -1,6 +1,8 @@
-package net.minecraft.src.absorr.morered;
+package absorr.morered.materials;
 
 import java.util.*;
+
+import absorr.morered.base.CommonProxy;
 import net.minecraft.src.*;
 
 public class ItemMultiTool extends ItemTool
@@ -16,7 +18,7 @@ public class ItemMultiTool extends ItemTool
 	@Override
 	public String getTextureFile() 
 	{
-		return "/morered/items.png";
+		return CommonProxy.itemPic;
 	}
 	
 	/**
