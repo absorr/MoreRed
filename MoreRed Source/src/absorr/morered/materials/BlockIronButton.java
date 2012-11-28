@@ -18,8 +18,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-import absorr.morecrafts.materials.*;
-
 
 import net.minecraftforge.common.*;
 

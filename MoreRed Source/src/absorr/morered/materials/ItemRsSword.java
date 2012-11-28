@@ -1,6 +1,5 @@
 package absorr.morered.materials;
 
-import absorr.morecrafts.materials.*;
 import absorr.morered.base.CommonProxy;
 import net.minecraft.src.*;
 

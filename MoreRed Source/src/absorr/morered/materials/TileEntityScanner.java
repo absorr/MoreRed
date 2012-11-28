@@ -3,8 +3,6 @@ import net.minecraft.src.*;
 
 import java.util.Random;
 
-import absorr.morecrafts.materials.*;
-
 
 public class TileEntityScanner extends TileEntity implements IInventory
 {

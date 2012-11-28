@@ -3,8 +3,6 @@ import net.minecraft.src.*;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import absorr.morecrafts.materials.*;
 import absorr.morered.base.CommonProxy;
 
 

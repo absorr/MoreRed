@@ -115,16 +115,23 @@ public class BlockDetecPlate extends BlockContainer
     {
         if (!par1World.isRemote)
         {
-        	TileEntityDetecPlate tile = (TileEntityDetecPlate) par1World.getBlockTileEntity(par2, par3, par4);
-        	int slot1 = tile.getStackInSlot(0).getItemDamage();
-        	int slot2 = tile.getStackInSlot(1).getItemDamage();
-        	int slot3 = tile.getStackInSlot(2).getItemDamage();
-            if (par1World.getBlockMetadata(par2, par3, par4) != 1)
-            {
-            	int entID = par5Entity.entityId;
-            	if (entID == slot1 || entID == slot2 || entID == slot3)
-            		this.setStateIfMobInteractsWithPlate(par1World, par2, par3, par4, true);
-            }
+        	try
+        	{
+        		TileEntityDetecPlate tile = (TileEntityDetecPlate) par1World.getBlockTileEntity(par2, par3, par4);
+            	int slot1 = tile.getStackInSlot(0).getItemDamage();
+            	int slot2 = tile.getStackInSlot(1).getItemDamage();
+            	int slot3 = tile.getStackInSlot(2).getItemDamage();
+	            if (par1World.getBlockMetadata(par2, par3, par4) != 1)
+	            {
+	            	int entID = par5Entity.entityId;
+	            	if (entID == slot1 || entID == slot2 || entID == slot3)
+	            		this.setStateIfMobInteractsWithPlate(par1World, par2, par3, par4, true);
+	            }
+        	}
+        	catch (NullPointerException nexc)
+        	{
+        		this.setStateIfMobInteractsWithPlate(par1World, par2, par3, par4, false);
+        	}
         }
     }
 

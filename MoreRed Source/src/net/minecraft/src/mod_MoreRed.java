@@ -112,7 +112,7 @@ public class mod_MoreRed extends BaseMod
         //Iron Button
         ModLoader.registerBlock(ironButton); 
         ModLoader.addName(new ItemStack(ironButton, 1), "Iron Button");
-        ModLoader.addRecipe(new ItemStack(ironButton, 1), new Object[] {"OIO", "IBI", "OIO", 'B', Block.button, 'I', Item.ingotIron});
+        ModLoader.addRecipe(new ItemStack(ironButton, 1), new Object[] {"OIO", "IBI", "OIO", 'B', Block.stoneButton, 'I', Item.ingotIron});
         //Redstone Block
         //ModLoader.addLocalization("tile.blankSpawner.blankSpawn.name", "Empty Monster Spawner");
         //ModLoader.addLocalization("tile.blankSpawner.rsBlock.name", "Redstone Block");

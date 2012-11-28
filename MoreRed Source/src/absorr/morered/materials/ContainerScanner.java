@@ -1,6 +1,5 @@
 package absorr.morered.materials;
 
-import absorr.morecrafts.materials.*;
 import net.minecraft.src.*;
 
 public class ContainerScanner extends Container
@@ -78,7 +77,7 @@ public class ContainerScanner extends Container
                 return null;
             }
 
-            var4.func_82870_a(par1EntityPlayer, var5);
+            var4.onPickupFromSlot(par1EntityPlayer, var5);
         }
 
         return var3;
