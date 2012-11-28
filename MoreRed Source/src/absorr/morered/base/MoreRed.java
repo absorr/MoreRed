@@ -1,6 +1,16 @@
-package net.minecraft.src;
+package absorr.morered.base;
 
 //import net.minecraft.src.absorr.morered.external.IC2Handler;
+import net.minecraft.src.BaseMod;
+import net.minecraft.src.Block;
+import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.EntityEggInfo;
+import net.minecraft.src.EntityList;
+import net.minecraft.src.EnumToolMaterial;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.ModLoader;
 import net.minecraftforge.client.*;
 import net.minecraftforge.common.*;
 import java.awt.List;
@@ -17,7 +27,7 @@ import absorr.morered.materials.*;
 
 @Mod(modid="MoreRed", name="MoreRed", version="Build 007")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
-public class mod_MoreRed extends BaseMod
+public class MoreRed extends BaseMod
 {
 	@SidedProxy(clientSide = "absorr.morered.base.ClientProxy", serverSide = "absorr.morered.base.CommonProxy", bukkitSide = "absorr.morered.base.CommonProxy")
 	public static CommonProxy proxy;
@@ -62,7 +72,7 @@ public class mod_MoreRed extends BaseMod
     		return false;
     	}
     }
-    public mod_MoreRed()
+    public MoreRed()
     {
     	//ModLoader.getMinecraftInstance().thePlayer.addChatMessage("MoreCrafts Development Build Loaded Succesfully");
     	

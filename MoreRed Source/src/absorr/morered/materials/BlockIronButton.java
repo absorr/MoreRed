@@ -18,6 +18,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
+import absorr.morered.base.MoreRed;
+
 
 import net.minecraftforge.common.*;
 
@@ -248,7 +250,7 @@ public class BlockIronButton extends Block
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4,EntityPlayer player, int par6, float par7, float par8, float par9)
     {
     	ItemStack heldItem = player.inventory.getCurrentItem();
-    	ItemStack tweaker = new ItemStack(mod_MoreRed.screwdriver);
+    	ItemStack tweaker = new ItemStack(MoreRed.screwdriver);
     	if (heldItem.itemID == tweaker.itemID)
     	{
     		int ticks = this.tickRate();

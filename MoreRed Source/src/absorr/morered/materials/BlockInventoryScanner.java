@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 import absorr.morered.base.CommonProxy;
+import absorr.morered.base.MoreRed;
 import absorr.morered.materials.*;
 
 import cpw.mods.fml.common.Side;
@@ -49,7 +50,7 @@ public class BlockInventoryScanner extends BlockContainer
     }
     public int idDropped(int i, Random random) 
     { 
-       return mod_MoreRed.invScanner.blockID; 
+       return MoreRed.invScanner.blockID; 
     } 
     public boolean renderAsNormalBlock()
     {

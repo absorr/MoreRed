@@ -13,9 +13,9 @@ public class CommonProxy
 	public static void addMerchantRecipies()
 	{
 		MerchantRecipeList npcTrade = new MerchantRecipeList();
-		npcTrade.addToListWithCheck(new MerchantRecipe (new ItemStack (Item.emerald, 4), new ItemStack (mod_MoreRed.rsMulti, 1)));
-		npcTrade.addToListWithCheck(new MerchantRecipe (new ItemStack (Item.emerald, 4), new ItemStack (mod_MoreRed.rsIngot, 3)));
-		npcTrade.addToListWithCheck(new MerchantRecipe (new ItemStack (mod_MoreRed.rsIngot, 3), new ItemStack (Item.emerald, 1)));
+		npcTrade.addToListWithCheck(new MerchantRecipe (new ItemStack (Item.emerald, 4), new ItemStack (MoreRed.rsMulti, 1)));
+		npcTrade.addToListWithCheck(new MerchantRecipe (new ItemStack (Item.emerald, 4), new ItemStack (MoreRed.rsIngot, 3)));
+		npcTrade.addToListWithCheck(new MerchantRecipe (new ItemStack (MoreRed.rsIngot, 3), new ItemStack (Item.emerald, 1)));
 	}
 	
 	/*
