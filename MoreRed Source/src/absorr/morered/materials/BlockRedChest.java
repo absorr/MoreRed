@@ -101,28 +101,4 @@ public class BlockRedChest extends BlockChest
     	else
     		return false;
     }
-
-    /**
-     * Looks for a sitting ocelot within certain bounds. Such an ocelot is considered to be blocking access to the
-     * chest.
-     */
-    public static boolean isOcelotBlockingChest(World par0World, int par1, int par2, int par3)
-    {
-        Iterator var4 = par0World.getEntitiesWithinAABB(EntityOcelot.class, AxisAlignedBB.getAABBPool().addOrModifyAABBInPool((double)par1, (double)(par2 + 1), (double)par3, (double)(par1 + 1), (double)(par2 + 2), (double)(par3 + 1))).iterator();
-        EntityOcelot var6;
-
-        do
-        {
-            if (!var4.hasNext())
-            {
-                return false;
-            }
-
-            EntityOcelot var5 = (EntityOcelot)var4.next();
-            var6 = (EntityOcelot)var5;
-        }
-        while (!var6.isSitting());
-
-        return true;
-    }
 }

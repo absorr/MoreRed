@@ -23,6 +23,7 @@ public class Config
 	    public static int crowbarID;
 	    public static int screwdriverID;
 	    public static int detecID;
+	    public static int playPlateID;
 	    public static int configurationProperties()
 	    {
 	            configuration.load();
@@ -31,6 +32,7 @@ public class Config
 	            ironButtonID = Integer.parseInt(configuration.getBlock(Configuration.CATEGORY_BLOCK, "Iron_Button", 194).value);
 	            rsChestID = Integer.parseInt(configuration.getBlock(Configuration.CATEGORY_BLOCK, "Redstone_Chest", 195).value);
 	            detecID = Integer.parseInt(configuration.getBlock(Configuration.CATEGORY_BLOCK, "Detection_Plate", 196).value);
+	            playPlateID = Integer.parseInt(configuration.getBlock(Configuration.CATEGORY_BLOCK, "Player_Plate", 197).value);
 	            rsChunkID = Integer.parseInt(configuration.getItem(Configuration.CATEGORY_ITEM, "Redstone_Chunk", 5980).value);
 	            rsIngotID = Integer.parseInt(configuration.getItem(Configuration.CATEGORY_ITEM, "Redstone_Ingot", 5981).value);
 	            rsPickID = Integer.parseInt(configuration.getItem(Configuration.CATEGORY_ITEM, "Redstone_Pickaxe", 5983).value);

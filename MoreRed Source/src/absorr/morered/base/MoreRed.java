@@ -12,6 +12,8 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import cpw.mods.fml.common.*;
+import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import absorr.morered.base.*;
 import absorr.morered.materials.*;
@@ -39,9 +41,10 @@ public class MoreRed extends BaseMod
     public static Block ironButton; 
     public static Block rsChest;
     public static Block detecPlate; 
+    public static Block playerPlate;
     
-    
-    public void load()
+    @Init
+    public void load(FMLInitializationEvent event)
     {
     	proxy.registerRenderers();
     	
@@ -59,7 +62,8 @@ public class MoreRed extends BaseMod
         invScanner = new BlockInventoryScanner(Config.scannerID, 6).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Inventory Scanner"); 
         ironButton = new BlockIronButton(Config.ironButtonID, 22).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Iron Button"); 
         rsChest = new BlockRedChest(Config.rsChestID).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Redstone Chest"); 
-        detecPlate = new BlockDetecPlate(Config.detecID, 9, Material.rock).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Detection Plate");
+        detecPlate = new BlockDetecPlate(Config.detecID, 4, Material.rock).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Detection Plate");
+        playerPlate = new BlockPlayerPlate(Config.playPlateID, 3, Material.rock).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Player Plate");
 
     	loadMaterials();
     	proxy.addMerchantRecipies();
@@ -142,7 +146,11 @@ public class MoreRed extends BaseMod
         //Detection Plate
         ModLoader.registerBlock(detecPlate); 
         ModLoader.addName(new ItemStack(detecPlate), "Detection Plate");
-        ModLoader.addRecipe(new ItemStack(detecPlate), new Object[] {"CRC", "RER", "CBC", 'R', rsIngot, 'B', Block.brick, 'C', Item.brick, 'E', Item.enderPearl});
+        ModLoader.addRecipe(new ItemStack(detecPlate), new Object[] {"CRC", "RER", "CBC", 'R', rsIngot, 'B', playerPlate, 'C', Item.brick, 'E', Item.enderPearl});
+        //Player Plate
+        ModLoader.registerBlock(playerPlate); 
+        ModLoader.addName(new ItemStack(playerPlate), "Player Plate");
+        ModLoader.addShapelessRecipe(new ItemStack(playerPlate), new Object[] {Block.pressurePlateStone, Block.obsidian});
     }
     public String getVersion()
     {
@@ -153,7 +161,9 @@ public class MoreRed extends BaseMod
     	switch(id)
     	{
     		case 0: return new GuiScanner(player.inventory, (TileEntityScanner)player.worldObj.getBlockTileEntity(x, y, z));
+    		case 1: return new GuiDetecPlate(player.inventory, (TileEntityDetecPlate)player.worldObj.getBlockTileEntity(x, y, z));
     		default: return null;
     	}
     }
+    public void load(){load(new FMLInitializationEvent());}
 }

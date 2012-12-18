@@ -121,6 +121,7 @@ public class BlockDetecPlate extends BlockContainer
             	int slot1 = tile.getStackInSlot(0).getItemDamage();
             	int slot2 = tile.getStackInSlot(1).getItemDamage();
             	int slot3 = tile.getStackInSlot(2).getItemDamage();
+            	System.out.println(slot1 + " " + slot2 + " " + slot3 + " Ent: " + par5Entity.entityId);
 	            if (par1World.getBlockMetadata(par2, par3, par4) != 1)
 	            {
 	            	int entID = par5Entity.entityId;
@@ -255,7 +256,14 @@ public class BlockDetecPlate extends BlockContainer
     	TileEntityDetecPlate var6 = (TileEntityDetecPlate)world.getBlockTileEntity(x, y, z);
         if (var6 != null)
         {
-            ModLoader.openGUI(player, new GuiDetecPlate(player.inventory, var6));
+        	if(player instanceof EntityPlayerMP)
+            {
+        		ModLoader.serverOpenWindow((EntityPlayerMP)player, new ContainerDetecPlate(player.inventory,var6), 0, x, y, z);
+            }
+            else
+            {
+            	ModLoader.openGUI((EntityPlayerSP)player, new GuiDetecPlate(player.inventory, var6));
+            }
         }
 
         return true;
