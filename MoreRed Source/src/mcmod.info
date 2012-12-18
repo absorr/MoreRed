@@ -1,8 +1,8 @@
 [
 {
-  "modid" : "mod_MoreRed",
-  "name" : "More Red",
-  "version" : "Development Build",
+  "modid" : "MoreRed",
+  "name" : "MoreRed",
+  "version" : "1.0.1.007",
   "url" : "http://absorr.pcriot.com/mod/mod_MoreRed.html",
   "credits" : "Absorr Studios Inc.",
   "authors": [

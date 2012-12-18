@@ -45,7 +45,7 @@ public class GuiScanner extends GuiContainer
     public void initGui()
     {
     	super.initGui();
-        this.mc.thePlayer.craftingInventory = this.inventorySlots;
+        this.mc.thePlayer.inventoryContainer = this.inventorySlots;
         this.guiLeft = (this.width - this.xSize) / 2;
         this.guiTop = (this.height - this.ySize) / 2;
         //the 1 is the button ID, width / 2 is width location, height / 2 is height location, 98 is button size (length)

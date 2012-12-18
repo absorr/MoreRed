@@ -149,7 +149,7 @@ public class BlockDetecPlate extends BlockContainer
             par1World.setBlockMetadataWithNotify(par2, par3, par4, 1);
             par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
             par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
-            par1World.markBlocksDirty(par2, par3, par4, par2, par3, par4);
+            par1World.markBlockRangeForRenderUpdate(par2, par3, par4, par2, par3, par4);
             par1World.playSoundEffect((double)par2 + 0.5D, (double)par3 + 0.1D, (double)par4 + 0.5D, "random.click", 0.3F, 0.6F);
         }
 
@@ -158,7 +158,7 @@ public class BlockDetecPlate extends BlockContainer
             par1World.setBlockMetadataWithNotify(par2, par3, par4, 0);
             par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
             par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
-            par1World.markBlocksDirty(par2, par3, par4, par2, par3, par4);
+            par1World.markBlockRangeForRenderUpdate(par2, par3, par4, par2, par3, par4);
             par1World.playSoundEffect((double)par2 + 0.5D, (double)par3 + 0.1D, (double)par4 + 0.5D, "random.click", 0.3F, 0.5F);
         }
 

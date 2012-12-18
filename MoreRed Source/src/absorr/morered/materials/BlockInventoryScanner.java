@@ -424,7 +424,7 @@ public class BlockInventoryScanner extends BlockContainer
         		par1World.setBlockMetadata(par2, par3, par4, 101);
         	else
         		par1World.setBlockMetadata(par2, par3, par4, 1);
-        	par1World.markBlocksDirty(par2, par3, par4, par2, par3, par4);
+        	par1World.markBlockRangeForRenderUpdate(par2, par3, par4, par2, par3, par4);
         	par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate());
         	par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
         	System.out.println("Metadata is " + par1World.getBlockMetadata(par2, par3, par4));
@@ -754,7 +754,7 @@ public class BlockInventoryScanner extends BlockContainer
         		par1World.setBlockMetadataWithNotify(par2, par3, par4, 101);
         	if (par1World.getBlockMetadata(par2, par3, par4) == 0)
         		par1World.setBlockMetadataWithNotify(par2, par3, par4, 1);
-        	par1World.markBlocksDirty(par2, par3, par4, par2, par3, par4);
+        	par1World.markBlockRangeForRenderUpdate(par2, par3, par4, par2, par3, par4);
         	par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate());
         	par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
         	par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
@@ -785,7 +785,14 @@ public class BlockInventoryScanner extends BlockContainer
     	TileEntityScanner var6 = (TileEntityScanner)world.getBlockTileEntity(x, y, z);
         if (var6 != null)
         {
-            ModLoader.openGUI(ModLoader.getMinecraftInstance().thePlayer, new GuiScanner(ModLoader.getMinecraftInstance().thePlayer.inventory, var6));
+        	if(player instanceof EntityPlayerMP)
+            {
+        		ModLoader.serverOpenWindow((EntityPlayerMP)player, new ContainerScanner(player.inventory,var6), 0, x, y, z);
+            }
+            else
+            {
+            	ModLoader.openGUI((EntityPlayerSP)player, new GuiScanner(player.inventory, var6));
+            }
         }
 
         return true;
@@ -810,7 +817,7 @@ public class BlockInventoryScanner extends BlockContainer
      * Is this block powering the block on the specified side
      */
     @Override
-    public boolean isPoweringTo(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+    public boolean isProvidingStrongPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
     	return par1IBlockAccess.getBlockMetadata(par2, par3, par4) == 1 || par1IBlockAccess.getBlockMetadata(par2, par3, par4) == 101;
     }
@@ -819,7 +826,7 @@ public class BlockInventoryScanner extends BlockContainer
      * Is this block indirectly powering the block on the specified side
      */
     @Override
-    public boolean isIndirectlyPoweringTo(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+    public boolean isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
         int var6 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
 
