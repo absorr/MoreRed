@@ -1,9 +1,15 @@
 package absorr.morered.materials;
-import net.minecraft.src.*;
-
 import java.util.ArrayList;
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import absorr.morecrafts.base.MoreCrafts;
 import absorr.morered.base.CommonProxy;
 import absorr.morered.base.MoreRed;
@@ -173,6 +179,11 @@ public class BlockToolCharger extends Block
     {
     	ItemStack heldItem = player.inventory.getCurrentItem();//This is to get the item that the player is currently holding. (if any)
     	int meta = world.getBlockMetadata(x, y, z);
+    	if (heldItem == null)
+    	{
+    		player.performHurtAnimation();
+    		return false;
+    	}
     	if (heldItem.getItem().equals(MoreRed.rsPick)) //|| World.getBlockMetadata(x, y, z).equals(1)) If the held item is a book then we execute this piece of code
     	{
     		if (meta == 1)

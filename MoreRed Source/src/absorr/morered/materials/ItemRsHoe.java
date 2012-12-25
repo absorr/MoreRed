@@ -1,9 +1,11 @@
 package absorr.morered.materials;
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.ItemHoe;
 import absorr.morered.base.CommonProxy;
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
-import net.minecraft.src.*;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemRsHoe extends ItemHoe
 {
@@ -14,7 +16,6 @@ public class ItemRsHoe extends ItemHoe
 		this.setCreativeTab(CreativeTabs.tabTools);
 	}
 	
-	@SideOnly(Side.CLIENT)
 	@Override
 	public String getTextureFile() 
 	{

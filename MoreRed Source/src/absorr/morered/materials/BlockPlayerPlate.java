@@ -1,7 +1,9 @@
 package absorr.morered.materials;
 
+import net.minecraft.block.BlockPressurePlate;
+import net.minecraft.block.EnumMobType;
+import net.minecraft.block.material.Material;
 import absorr.morered.base.ClientProxy;
-import net.minecraft.src.*;
 
 public class BlockPlayerPlate extends BlockPressurePlate
 {

@@ -3,7 +3,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-import net.minecraft.src.*;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.src.ModLoader;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.MinecraftException;
+import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 

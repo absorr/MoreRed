@@ -1,6 +1,13 @@
 package absorr.morered.base;
 
 //import net.minecraft.src.absorr.morered.external.IC2Handler;
+import net.minecraft.block.*;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.item.*;
 import net.minecraft.src.*;
 import net.minecraftforge.client.*;
 import net.minecraftforge.common.*;
@@ -15,6 +22,7 @@ import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.*;
 import absorr.morered.base.*;
 import absorr.morered.materials.*;
 
@@ -90,48 +98,48 @@ public class MoreRed extends BaseMod
             //IC2Handler.loadRecipies();
         }
     	//Redstone Chunk
-        ModLoader.addName(rsChunk, "Redstone Chunk");
-        ModLoader.addSmelting(Item.redstone.shiftedIndex, new ItemStack(rsChunk));
+        LanguageRegistry.addName(rsChunk, "Redstone Chunk");
+        GameRegistry.addSmelting(Item.redstone.shiftedIndex, new ItemStack(rsChunk), 0.1F);
         //Redstone Ingot
-        ModLoader.addName(rsIngot, "Redstone Ingot");
-        ModLoader.addShapelessRecipe(new ItemStack(rsIngot, 1), new Object[] {rsChunk, rsChunk});
+        LanguageRegistry.addName(rsIngot, "Redstone Ingot");
+        GameRegistry.addShapelessRecipe(new ItemStack(rsIngot, 1), new Object[] {rsChunk, rsChunk});
         //Redstone Pickaxe
-        ModLoader.addName(rsPick, "Redstone Pickaxe");
-        ModLoader.addRecipe(new ItemStack(rsPick, 1), new Object[] {"RRR", "OSO", "OSO", 'R', rsIngot, 'S', Item.stick});
+        LanguageRegistry.addName(rsPick, "Redstone Pickaxe");
+        GameRegistry.addRecipe(new ItemStack(rsPick, 1), new Object[] {"RRR", "OSO", "OSO", 'R', rsIngot, 'S', Item.stick});
         //Tool Recharging Station
-        ModLoader.registerBlock(recharger); 
-        ModLoader.addName(recharger, "Tool Recharging Station");
-        ModLoader.addRecipe(new ItemStack(recharger, 1), new Object[] { 
+        GameRegistry.registerBlock(recharger); 
+        LanguageRegistry.addName(recharger, "Tool Recharging Station");
+        GameRegistry.addRecipe(new ItemStack(recharger, 1), new Object[] { 
         "IRI", "STS", "SSS", Character.valueOf('S'), Block.stone, Character.valueOf('T'), Block.torchRedstoneActive, Character.valueOf('R'), Item.redstone, Character.valueOf('I'), Block.blockSteel
         }); 
         //Redstone Shovel
-        ModLoader.addName(rsSpade, "Redstone Shovel");
-        ModLoader.addRecipe(new ItemStack(rsSpade, 1), new Object[] {"ORO", "OSO", "OSO", 'R', rsIngot, 'S', Item.stick});
+        LanguageRegistry.addName(rsSpade, "Redstone Shovel");
+        GameRegistry.addRecipe(new ItemStack(rsSpade, 1), new Object[] {"ORO", "OSO", "OSO", 'R', rsIngot, 'S', Item.stick});
         //Redstone Hoe
-        ModLoader.addName(rsHoe, "Redstone Hoe");
-        ModLoader.addRecipe(new ItemStack(rsHoe, 1), new Object[] {"ORR", "OSO", "OSO", 'R', rsIngot, 'S', Item.stick});
-        ModLoader.addRecipe(new ItemStack(rsHoe, 1), new Object[] {"RRO", "OSO", "OSO", 'R', rsIngot, 'S', Item.stick});
+        LanguageRegistry.addName(rsHoe, "Redstone Hoe");
+        GameRegistry.addRecipe(new ItemStack(rsHoe, 1), new Object[] {"ORR", "OSO", "OSO", 'R', rsIngot, 'S', Item.stick});
+        GameRegistry.addRecipe(new ItemStack(rsHoe, 1), new Object[] {"RRO", "OSO", "OSO", 'R', rsIngot, 'S', Item.stick});
         //Redstone Axe
-        ModLoader.addName(rsAxe, "Redstone Axe");
-        ModLoader.addRecipe(new ItemStack(rsAxe, 1), new Object[] {"RRO", "RSO", "OSO", 'R', rsIngot, 'S', Item.stick});
-        ModLoader.addRecipe(new ItemStack(rsAxe, 1), new Object[] {"ORR", "OSR", "OSO", 'R', rsIngot, 'S', Item.stick});
+        LanguageRegistry.addName(rsAxe, "Redstone Axe");
+        GameRegistry.addRecipe(new ItemStack(rsAxe, 1), new Object[] {"RRO", "RSO", "OSO", 'R', rsIngot, 'S', Item.stick});
+        GameRegistry.addRecipe(new ItemStack(rsAxe, 1), new Object[] {"ORR", "OSR", "OSO", 'R', rsIngot, 'S', Item.stick});
         //Redstone Sword
-        ModLoader.addName(rsSword, "Redstone Sword");
-        ModLoader.addRecipe(new ItemStack(rsSword, 1), new Object[] {"ORO", "ORO", "OSO", 'R', rsIngot, 'S', Item.stick});
+        LanguageRegistry.addName(rsSword, "Redstone Sword");
+        GameRegistry.addRecipe(new ItemStack(rsSword, 1), new Object[] {"ORO", "ORO", "OSO", 'R', rsIngot, 'S', Item.stick});
         //Redstone Multi-Tool
-        ModLoader.addName(rsMulti, "Redstone Multi-Tool");
-        ModLoader.addRecipe(new ItemStack(rsMulti, 1), new Object[] {"AHP", "OSO", "OSO", 'S', Item.stick, 'A', rsAxe, 'H', rsSpade, 'P', rsPick});
+        LanguageRegistry.addName(rsMulti, "Redstone Multi-Tool");
+        GameRegistry.addRecipe(new ItemStack(rsMulti, 1), new Object[] {"AHP", "OSO", "OSO", 'S', Item.stick, 'A', rsAxe, 'H', rsSpade, 'P', rsPick});
         //Crowbar
-        ModLoader.addName(crowbar, "Crowbar");
-        ModLoader.addRecipe(new ItemStack(crowbar, 1), new Object[] {"IOO", "IIO", "OOI", 'I', Item.ingotIron});
+        LanguageRegistry.addName(crowbar, "Crowbar");
+        GameRegistry.addRecipe(new ItemStack(crowbar, 1), new Object[] {"IOO", "IIO", "OOI", 'I', Item.ingotIron});
         //Inventory Scanner
-        ModLoader.registerBlock(invScanner); 
-        ModLoader.addName(new ItemStack(invScanner, 1), "Inventory Scanner");
-        ModLoader.addRecipe(new ItemStack(invScanner, 1), new Object[] {"LEL", "IRI", "LEL", 'E', Item.enderPearl, 'I', Item.ingotIron, 'R', Item.redstone, 'L', new ItemStack(Item.dyePowder, 1, 4)});
+        GameRegistry.registerBlock(invScanner); 
+        LanguageRegistry.addName(new ItemStack(invScanner, 1), "Inventory Scanner");
+        GameRegistry.addRecipe(new ItemStack(invScanner, 1), new Object[] {"LEL", "IRI", "LEL", 'E', Item.enderPearl, 'I', Item.ingotIron, 'R', Item.redstone, 'L', new ItemStack(Item.dyePowder, 1, 4)});
         //Iron Button
-        ModLoader.registerBlock(ironButton); 
-        ModLoader.addName(new ItemStack(ironButton, 1), "Iron Button");
-        ModLoader.addRecipe(new ItemStack(ironButton, 1), new Object[] {"OIO", "IBI", "OIO", 'B', Block.stoneButton, 'I', Item.ingotIron});
+        GameRegistry.registerBlock(ironButton); 
+        LanguageRegistry.addName(new ItemStack(ironButton, 1), "Iron Button");
+        GameRegistry.addRecipe(new ItemStack(ironButton, 1), new Object[] {"OIO", "IBI", "OIO", 'B', Block.stoneButton, 'I', Item.ingotIron});
         //Redstone Block
         //ModLoader.addLocalization("tile.blankSpawner.blankSpawn.name", "Empty Monster Spawner");
         //ModLoader.addLocalization("tile.blankSpawner.rsBlock.name", "Redstone Block");
@@ -156,6 +164,7 @@ public class MoreRed extends BaseMod
     {
         return "1.1.008";
     }
+    @Override
     public GuiContainer getContainerGUI(EntityClientPlayerMP player, int id, int x, int y, int z)
     {
     	switch(id)

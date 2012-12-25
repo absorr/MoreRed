@@ -1,7 +1,9 @@
 package absorr.morered.materials;
 
-import java.io.*;
-import net.minecraft.src.*;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.StatCollector;
+
 import org.lwjgl.opengl.GL11;
 
 public class GuiDetecPlate extends GuiContainer

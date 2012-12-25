@@ -1,6 +1,11 @@
 package absorr.morered.materials;
 
+import net.minecraft.entity.player.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
 import net.minecraft.src.*;
+import net.minecraft.tileentity.*;
 
 public class TileEntityDetecPlate extends TileEntity implements IInventory
 {

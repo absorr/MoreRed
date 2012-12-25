@@ -1,27 +1,23 @@
 package absorr.morered.materials;
-import static net.minecraftforge.common.ForgeDirection.EAST;
-import static net.minecraftforge.common.ForgeDirection.NORTH;
-import static net.minecraftforge.common.ForgeDirection.SOUTH;
-import static net.minecraftforge.common.ForgeDirection.WEST;
-import net.minecraft.client.Minecraft;
-import net.minecraft.src.*;
-import net.minecraftforge.client.*;
-import net.minecraftforge.common.*;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.awt.event.*;
-import java.io.DataOutput;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
+import net.minecraft.block.BlockButton;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.src.ModLoader;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.MinecraftException;
+import net.minecraft.world.World;
 import absorr.morered.base.MoreRed;
-
-
-import net.minecraftforge.common.*;
 
 public class BlockIronButton extends BlockButton
 {

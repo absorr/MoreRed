@@ -1,6 +1,8 @@
 package absorr.morered.base;
 
+import net.minecraft.item.*;
 import net.minecraft.src.*;
+import net.minecraft.village.*;
 
 public class CommonProxy 
 {

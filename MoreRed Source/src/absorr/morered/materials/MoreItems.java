@@ -1,6 +1,7 @@
 package absorr.morered.materials;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import absorr.morered.base.CommonProxy;
-import net.minecraft.src.*;
 
 public class MoreItems extends Item
 {

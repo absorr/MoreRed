@@ -1,5 +1,7 @@
 package absorr.morered.base;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.src.*;
 
 import java.util.*;

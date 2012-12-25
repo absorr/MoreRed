@@ -3,10 +3,19 @@ package absorr.morered.materials;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockFence;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.entity.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.src.ModLoader;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import absorr.morered.base.CommonProxy;
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
-import net.minecraft.src.*;
 
 public class BlockDetecPlate extends BlockContainer
 {
@@ -20,7 +29,6 @@ public class BlockDetecPlate extends BlockContainer
         this.setBlockBounds(var5, 0.0F, var5, 1.0F - var5, 0.03125F, 1.0F - var5);
     }
     
-    @SideOnly(Side.CLIENT)
 	@Override
 	public String getTextureFile() 
 	{
@@ -250,7 +258,7 @@ public class BlockDetecPlate extends BlockContainer
 		return new TileEntityDetecPlate();
 	}
 	
-	@SideOnly(Side.CLIENT)
+	@Override
     public boolean onBlockActivated(World world, int x, int y, int z,EntityPlayer player, int par6, float par7, float par8, float par9)
     {
     	TileEntityDetecPlate var6 = (TileEntityDetecPlate)world.getBlockTileEntity(x, y, z);

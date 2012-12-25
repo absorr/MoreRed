@@ -1,19 +1,30 @@
 package absorr.morered.materials;
-import net.minecraft.src.*;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.EnumMobType;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.src.ModLoader;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import absorr.morered.base.CommonProxy;
 import absorr.morered.base.MoreRed;
-import absorr.morered.materials.*;
-
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockInventoryScanner extends BlockContainer
 {
@@ -91,7 +102,7 @@ public class BlockInventoryScanner extends BlockContainer
             if (par5Entity instanceof EntityItem)
             {
             	EntityItem entity = (EntityItem) par5Entity;
-            	this.scanForItem(par1World, par2, par3, par4, entity.item);
+            	this.scanForItem(par1World, par2, par3, par4, entity.func_92014_d());
             }
             if (par5Entity instanceof EntityLiving)
             {
