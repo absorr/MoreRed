@@ -177,6 +177,7 @@ public class BlockToolCharger extends Block
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z,EntityPlayer player, int par6, float par7, float par8, float par9)
     {
+    	int charge = 1;
     	ItemStack heldItem = player.inventory.getCurrentItem();//This is to get the item that the player is currently holding. (if any)
     	int meta = world.getBlockMetadata(x, y, z);
     	if (heldItem == null)
@@ -184,12 +185,30 @@ public class BlockToolCharger extends Block
     		player.performHurtAnimation();
     		return false;
     	}
+    	else
+    	{
+    		if (world.isBlockProvidingPowerTo(x - 1, y, z, 4)) charge += 2;
+    		if (world.isBlockProvidingPowerTo(x + 1, y, z, 5)) charge += 2;
+    		if (world.isBlockProvidingPowerTo(x, y - 1, z, 0)) charge += 2;
+    		if (world.isBlockProvidingPowerTo(x, y + 1, z, 1)) charge += 2;
+    		if (world.isBlockProvidingPowerTo(x, y, z - 1, 2)) charge += 2;
+    		if (world.isBlockProvidingPowerTo(x, y, z + 1, 3)) charge += 2;
+    		if (world.isBlockIndirectlyProvidingPowerTo(x - 1, y, z, 4)) charge += 1;
+    		if (world.isBlockIndirectlyProvidingPowerTo(x + 1, y, z, 5)) charge += 1;
+    		if (world.isBlockIndirectlyProvidingPowerTo(x, y - 1, z, 0)) charge += 1;
+    		if (world.isBlockIndirectlyProvidingPowerTo(x, y + 1, z, 1)) charge += 1;
+    		if (world.isBlockIndirectlyProvidingPowerTo(x, y, z - 1, 2)) charge += 1;
+    		if (world.isBlockIndirectlyProvidingPowerTo(x, y, z + 1, 3)) charge += 1;
+    	}
+    	
     	if (heldItem.getItem().equals(MoreRed.rsPick)) //|| World.getBlockMetadata(x, y, z).equals(1)) If the held item is a book then we execute this piece of code
     	{
     		if (meta == 1)
     		{
-    			//world.setBlockWithNotify(x, y, z, Block.sand.blockID);//This places a block at the location of the block you rightclicked on.
-    			player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(MoreRed.rsPick));//replace the currentheld item with a piece of raw pork.
+    			if (player.inventory.getCurrentItem().getItemDamage() < charge)
+    				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(MoreRed.rsPick));
+    			else
+    				player.inventory.getCurrentItem().setItemDamage(player.inventory.getCurrentItem().getItemDamage() - charge);
     			return true;
     		}
     	}
@@ -197,8 +216,10 @@ public class BlockToolCharger extends Block
     	{
     		if (meta == 2)
     		{
-    			//world.setBlockWithNotify(x, y, z, Block.sand.blockID);//This places a block at the location of the block you rightclicked on.
-    			player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(MoreRed.rsSpade));//replace the currentheld item with a piece of raw pork.
+    			if (player.inventory.getCurrentItem().getItemDamage() < charge)
+    				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(MoreRed.rsSpade));
+    			else
+    				player.inventory.getCurrentItem().setItemDamage(player.inventory.getCurrentItem().getItemDamage() - charge);//replace the currentheld item with a piece of raw pork.
     			return true;
     		}
     	}
@@ -206,8 +227,10 @@ public class BlockToolCharger extends Block
     	{
     		if (meta == 3)
     		{
-    			//world.setBlockWithNotify(x, y, z, Block.sand.blockID);//This places a block at the location of the block you rightclicked on.
-    			player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(MoreRed.rsHoe));//replace the currentheld item with a piece of raw pork.
+    			if (player.inventory.getCurrentItem().getItemDamage() < charge)
+    				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(MoreRed.rsHoe));
+    			else
+    				player.inventory.getCurrentItem().setItemDamage(player.inventory.getCurrentItem().getItemDamage() - charge);//replace the currentheld item with a piece of raw pork.
     			return true;
     		}
     	}
@@ -215,8 +238,10 @@ public class BlockToolCharger extends Block
     	{
     		if (meta == 4)
     		{
-    			//world.setBlockWithNotify(x, y, z, Block.sand.blockID);//This places a block at the location of the block you rightclicked on.
-    			player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(MoreRed.rsAxe));//replace the currentheld item with a piece of raw pork.
+    			if (player.inventory.getCurrentItem().getItemDamage() < charge)
+    				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(MoreRed.rsAxe));
+    			else
+    				player.inventory.getCurrentItem().setItemDamage(player.inventory.getCurrentItem().getItemDamage() - charge);//replace the currentheld item with a piece of raw pork.
     			return true;
     		}
     	}
@@ -224,8 +249,10 @@ public class BlockToolCharger extends Block
     	{
     		if (meta == 5)
     		{
-    			//world.setBlockWithNotify(x, y, z, Block.sand.blockID);//This places a block at the location of the block you rightclicked on.
-    			player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(MoreRed.rsSword));//replace the currentheld item with a piece of raw pork.
+    			if (player.inventory.getCurrentItem().getItemDamage() < charge)
+    				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(MoreRed.rsSword));
+    			else
+    				player.inventory.getCurrentItem().setItemDamage(player.inventory.getCurrentItem().getItemDamage() - charge);//replace the currentheld item with a piece of raw pork.
     			return true;
     		}
     	}
@@ -233,8 +260,10 @@ public class BlockToolCharger extends Block
     	{
     		if (meta == 6)
     		{
-    			//world.setBlockWithNotify(x, y, z, Block.sand.blockID);//This places a block at the location of the block you rightclicked on.
-    			player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(MoreRed.rsMulti));//replace the currentheld item with a piece of raw pork.
+    			if (player.inventory.getCurrentItem().getItemDamage() < charge)
+    				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(MoreRed.rsMulti));
+    			else
+    				player.inventory.getCurrentItem().setItemDamage(player.inventory.getCurrentItem().getItemDamage() - charge);//replace the currentheld item with a piece of raw pork.
     			return true;
     		}
     	}
@@ -243,7 +272,7 @@ public class BlockToolCharger extends Block
     		if (meta == 0)
     		{
     			world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 1);//This places a block at the location of the block you rightclicked on.
-    			player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.stick));//replace the currentheld item with a piece of raw pork.
+    			player.inventory.setInventorySlotContents(player.inventory.currentItem, null);//replace the currentheld item with a piece of raw pork.
     			return true;
     		}
     	}
@@ -252,7 +281,7 @@ public class BlockToolCharger extends Block
     		if (meta == 0)
     		{
     			world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 2);//This places a block at the location of the block you rightclicked on.
-    			player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.stick));//replace the currentheld item with a piece of raw pork.
+    			player.inventory.setInventorySlotContents(player.inventory.currentItem, null);//replace the currentheld item with a piece of raw pork.
     			return true;
     		}
     	}
@@ -261,7 +290,7 @@ public class BlockToolCharger extends Block
     		if (meta == 0)
     		{
     			world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 3);
-    			player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.stick));
+    			player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
     			return true;
     		}
     		
@@ -271,7 +300,7 @@ public class BlockToolCharger extends Block
     		if (meta == 0)
     		{
     			world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 4);
-    			player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.stick));
+    			player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
     			return true;
     		}
     	}
@@ -280,7 +309,7 @@ public class BlockToolCharger extends Block
     		if (meta == 0)
     		{
     			world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 5);
-    			player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.stick));
+    			player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
     			return true;
     		}
     	}
@@ -289,7 +318,7 @@ public class BlockToolCharger extends Block
     		if (meta == 0)
     		{
     			world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 6);
-    			player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.stick));
+    			player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
     			return true;
     		}
     	}

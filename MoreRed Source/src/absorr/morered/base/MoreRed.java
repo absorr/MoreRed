@@ -105,27 +105,27 @@ public class MoreRed extends BaseMod
         GameRegistry.addShapelessRecipe(new ItemStack(rsIngot, 1), new Object[] {rsChunk, rsChunk});
         //Redstone Pickaxe
         LanguageRegistry.addName(rsPick, "Redstone Pickaxe");
-        GameRegistry.addRecipe(new ItemStack(rsPick, 1), new Object[] {"RRR", "OSO", "OSO", 'R', rsIngot, 'S', Item.stick});
+        GameRegistry.addRecipe(new ItemStack(rsPick, 1), new Object[] {"RRR", "OSO", "OSO", 'R', rsIngot, 'S', Item.blazeRod});
         //Tool Recharging Station
         GameRegistry.registerBlock(recharger); 
         LanguageRegistry.addName(recharger, "Tool Recharging Station");
         GameRegistry.addRecipe(new ItemStack(recharger, 1), new Object[] { 
-        "IRI", "STS", "SSS", Character.valueOf('S'), Block.stone, Character.valueOf('T'), Block.torchRedstoneActive, Character.valueOf('R'), Item.redstone, Character.valueOf('I'), Block.blockSteel
-        }); 
+        "IRI", "STS", "SSS", Character.valueOf('S'), Block.stone, Character.valueOf('T'), Block.torchRedstoneActive, Character.valueOf('R'), 
+        Item.blazePowder, Character.valueOf('I'), Item.ingotIron}); 
         //Redstone Shovel
         LanguageRegistry.addName(rsSpade, "Redstone Shovel");
-        GameRegistry.addRecipe(new ItemStack(rsSpade, 1), new Object[] {"ORO", "OSO", "OSO", 'R', rsIngot, 'S', Item.stick});
+        GameRegistry.addRecipe(new ItemStack(rsSpade, 1), new Object[] {"ORO", "OSO", "OSO", 'R', rsIngot, 'S', Item.blazeRod});
         //Redstone Hoe
         LanguageRegistry.addName(rsHoe, "Redstone Hoe");
-        GameRegistry.addRecipe(new ItemStack(rsHoe, 1), new Object[] {"ORR", "OSO", "OSO", 'R', rsIngot, 'S', Item.stick});
-        GameRegistry.addRecipe(new ItemStack(rsHoe, 1), new Object[] {"RRO", "OSO", "OSO", 'R', rsIngot, 'S', Item.stick});
+        GameRegistry.addRecipe(new ItemStack(rsHoe, 1), new Object[] {"ORR", "OSO", "OSO", 'R', rsIngot, 'S', Item.blazeRod});
+        GameRegistry.addRecipe(new ItemStack(rsHoe, 1), new Object[] {"RRO", "OSO", "OSO", 'R', rsIngot, 'S', Item.blazeRod});
         //Redstone Axe
         LanguageRegistry.addName(rsAxe, "Redstone Axe");
-        GameRegistry.addRecipe(new ItemStack(rsAxe, 1), new Object[] {"RRO", "RSO", "OSO", 'R', rsIngot, 'S', Item.stick});
-        GameRegistry.addRecipe(new ItemStack(rsAxe, 1), new Object[] {"ORR", "OSR", "OSO", 'R', rsIngot, 'S', Item.stick});
+        GameRegistry.addRecipe(new ItemStack(rsAxe, 1), new Object[] {"RRO", "RSO", "OSO", 'R', rsIngot, 'S', Item.blazeRod});
+        GameRegistry.addRecipe(new ItemStack(rsAxe, 1), new Object[] {"ORR", "OSR", "OSO", 'R', rsIngot, 'S', Item.blazeRod});
         //Redstone Sword
         LanguageRegistry.addName(rsSword, "Redstone Sword");
-        GameRegistry.addRecipe(new ItemStack(rsSword, 1), new Object[] {"ORO", "ORO", "OSO", 'R', rsIngot, 'S', Item.stick});
+        GameRegistry.addRecipe(new ItemStack(rsSword, 1), new Object[] {"ORO", "ORO", "OSO", 'R', rsIngot, 'S', Item.blazeRod});
         //Redstone Multi-Tool
         LanguageRegistry.addName(rsMulti, "Redstone Multi-Tool");
         GameRegistry.addRecipe(new ItemStack(rsMulti, 1), new Object[] {"AHP", "OSO", "OSO", 'S', Item.stick, 'A', rsAxe, 'H', rsSpade, 'P', rsPick});
