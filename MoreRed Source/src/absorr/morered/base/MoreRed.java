@@ -25,6 +25,8 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.*;
 import absorr.morered.base.*;
 import absorr.morered.materials.*;
+import absorr.morered.ui.GuiDetecPlate;
+import absorr.morered.ui.GuiScanner;
 
 @Mod(modid="MoreRed", name="MoreRed", version="Build 008")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
@@ -51,27 +53,32 @@ public class MoreRed extends BaseMod
     public static Block detecPlate; 
     public static Block playerPlate;
     
+    //Creative Tab
+    public static TabMoreRed creativeTab;
+    
     @Init
     public void load(FMLInitializationEvent event)
     {
     	proxy.registerRenderers();
     	
-    	rsChunk = new MoreItems(Config.rsChunkID, 64, CreativeTabs.tabMaterials).setItemName("redstoneChunk").setIconIndex(2);
-    	rsIngot = new MoreItems(Config.rsIngotID, 64, CreativeTabs.tabMaterials).setItemName("redstoneIngot").setIconIndex(3);
+    	creativeTab = new TabMoreRed("MoreRed");
+    	
+    	rsChunk = new MoreItems(Config.rsChunkID, 64, CreativeTabs.tabMaterials).setItemName("redstoneChunk").setIconIndex(2).setCreativeTab(creativeTab);
+    	rsIngot = new MoreItems(Config.rsIngotID, 64, CreativeTabs.tabMaterials).setItemName("redstoneIngot").setIconIndex(3).setCreativeTab(creativeTab);
     	rsPick = new ItemPickaxe(Config.rsPickID, EnumToolMaterial.IRON).setItemName("redstonePickaxe").setIconIndex(4).setTextureFile(proxy.itemPic).setCreativeTab(CreativeTabs.tabTools);
         rsSpade = new ItemSpade(Config.rsSpadeID, EnumToolMaterial.IRON).setItemName("redstoneShovel").setIconIndex(5).setTextureFile(proxy.itemPic).setCreativeTab(CreativeTabs.tabTools);
         rsHoe = new ItemHoe(Config.rsHoeID, EnumToolMaterial.IRON).setItemName("redstoneHoe").setIconIndex(6).setTextureFile(proxy.itemPic).setCreativeTab(CreativeTabs.tabTools);
         rsAxe = new ItemAxe(Config.rsAxeID, EnumToolMaterial.IRON).setItemName("redstoneAxe").setIconIndex(7).setTextureFile(proxy.itemPic).setCreativeTab(CreativeTabs.tabTools);
         rsSword = new ItemRsSword(Config.rsSwordID, EnumToolMaterial.IRON).setItemName("redstoneSword").setIconIndex(8).setTextureFile(proxy.itemPic).setCreativeTab(CreativeTabs.tabTools);
-        rsMulti = new ItemMultiTool(Config.rsMultiID, 1, EnumToolMaterial.IRON).setItemName("redstoneMultitool").setIconIndex(14);
-        crowbar = new MoreItems(Config.crowbarID, 1, CreativeTabs.tabTools).setItemName("crowbar").setIconIndex(16);
-        screwdriver = new MoreItems(Config.screwdriverID, 1, CreativeTabs.tabTools).setItemName("screwdriver").setIconIndex(1);
-        recharger = new BlockToolCharger(Config.rechargeID, 0).setHardness(1.0F).setResistance(6000.0F).setLightValue(1.0F).setBlockName("Tool Recharging Station"); 
-        invScanner = new BlockInventoryScanner(Config.scannerID, 6).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Inventory Scanner"); 
-        ironButton = new BlockIronButton(Config.ironButtonID, 22).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Iron Button"); 
-        rsChest = new BlockRedChest(Config.rsChestID).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Redstone Chest"); 
-        detecPlate = new BlockDetecPlate(Config.detecID, 4, Material.rock).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Detection Plate");
-        playerPlate = new BlockPlayerPlate(Config.playPlateID, 3, Material.rock).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Player Plate");
+        rsMulti = new ItemMultiTool(Config.rsMultiID, 1, EnumToolMaterial.IRON).setItemName("redstoneMultitool").setIconIndex(14).setCreativeTab(CreativeTabs.tabTools);
+        crowbar = new MoreItems(Config.crowbarID, 1, CreativeTabs.tabTools).setItemName("crowbar").setIconIndex(16).setCreativeTab(creativeTab);
+        screwdriver = new MoreItems(Config.screwdriverID, 1, CreativeTabs.tabTools).setItemName("screwdriver").setIconIndex(1).setCreativeTab(creativeTab);
+        recharger = new BlockToolCharger(Config.rechargeID, 0).setHardness(1.0F).setResistance(6000.0F).setLightValue(1.0F).setBlockName("Tool Recharging Station").setCreativeTab(creativeTab); 
+        invScanner = new BlockInventoryScanner(Config.scannerID, 6).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Inventory Scanner").setCreativeTab(creativeTab); 
+        ironButton = new BlockIronButton(Config.ironButtonID, 22).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Iron Button").setCreativeTab(creativeTab); 
+        rsChest = new BlockRedChest(Config.rsChestID).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Redstone Chest").setCreativeTab(creativeTab); 
+        detecPlate = new BlockDetecPlate(Config.detecID, 4, Material.rock).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Detection Plate").setCreativeTab(creativeTab);
+        playerPlate = new BlockPlayerPlate(Config.playPlateID, 3, Material.rock).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Player Plate").setCreativeTab(creativeTab);
 
     	loadMaterials();
     	proxy.addMerchantRecipies();
@@ -133,11 +140,11 @@ public class MoreRed extends BaseMod
         LanguageRegistry.addName(crowbar, "Crowbar");
         GameRegistry.addRecipe(new ItemStack(crowbar, 1), new Object[] {"IOO", "IIO", "OOI", 'I', Item.ingotIron});
         //Inventory Scanner
-        GameRegistry.registerBlock(invScanner); 
+        ModLoader.registerBlock(invScanner); 
         LanguageRegistry.addName(new ItemStack(invScanner, 1), "Inventory Scanner");
         GameRegistry.addRecipe(new ItemStack(invScanner, 1), new Object[] {"LEL", "IRI", "LEL", 'E', Item.enderPearl, 'I', Item.ingotIron, 'R', Item.redstone, 'L', new ItemStack(Item.dyePowder, 1, 4)});
         //Iron Button
-        GameRegistry.registerBlock(ironButton); 
+        ModLoader.registerBlock(ironButton); 
         LanguageRegistry.addName(new ItemStack(ironButton, 1), "Iron Button");
         GameRegistry.addRecipe(new ItemStack(ironButton, 1), new Object[] {"OIO", "IBI", "OIO", 'B', Block.stoneButton, 'I', Item.ingotIron});
         //Redstone Block

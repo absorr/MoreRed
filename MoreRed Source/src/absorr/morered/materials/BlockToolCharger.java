@@ -2,6 +2,8 @@ package absorr.morered.materials;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.absorr.morecrafts.base.MoreCrafts;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -10,7 +12,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import absorr.morecrafts.base.MoreCrafts;
 import absorr.morered.base.CommonProxy;
 import absorr.morered.base.MoreRed;
 

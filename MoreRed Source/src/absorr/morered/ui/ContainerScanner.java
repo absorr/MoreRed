@@ -1,5 +1,6 @@
-package absorr.morered.materials;
+package absorr.morered.ui;
 
+import absorr.morered.materials.TileEntityScanner;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

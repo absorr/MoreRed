@@ -23,6 +23,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import absorr.morered.base.CommonProxy;
 import absorr.morered.base.MoreRed;
+import absorr.morered.ui.ContainerScanner;
+import absorr.morered.ui.GuiScanner;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

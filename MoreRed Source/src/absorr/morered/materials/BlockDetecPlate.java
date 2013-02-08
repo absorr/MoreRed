@@ -16,6 +16,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import absorr.morered.base.CommonProxy;
+import absorr.morered.ui.ContainerDetecPlate;
+import absorr.morered.ui.GuiDetecPlate;
 
 public class BlockDetecPlate extends BlockContainer
 {
