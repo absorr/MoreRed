@@ -11,7 +11,6 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerRenderers() 
 	{
-		MinecraftForgeClient.preloadTexture(itemPic); 
-    	MinecraftForgeClient.preloadTexture(blockPic);
+		MinecraftForgeClient.preloadTexture("mods/morered/gui/scan.png"); 
 	}
 }

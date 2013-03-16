@@ -4,12 +4,17 @@ import java.util.Random;
 
 import com.absorr.morecrafts.base.MoreCrafts;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import absorr.morered.base.CommonProxy;
@@ -18,18 +23,34 @@ import absorr.morered.base.MoreRed;
 
 public class BlockToolCharger extends Block
 {
-	public BlockToolCharger(int i, int j) 
+	private Icon field_94459_cP;
+	private Icon field_94458_cO;
+	public BlockToolCharger(int i) 
     { 
-        super(i, j, Material.iron);
+        super(i, Material.iron);
         setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
         setLightOpacity(255);
         this.setCreativeTab(CreativeTabs.tabRedstone);
-    } 
-	@Override
-	public String getTextureFile() 
-	{
-		return CommonProxy.blockPic;
-	}
+    }
+	
+	@SideOnly(Side.CLIENT)
+
+    /**
+     * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
+     */
+    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
+    {
+        return par1 == 1 ? this.field_94458_cO : (par1 == 0 ? this.field_94459_cP : (par1 != par2 ? this.field_94336_cN : this.field_94458_cO));
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void func_94332_a(IconRegister par1IconRegister)
+    {
+        this.field_94336_cN = par1IconRegister.func_94245_a("morered:chargeside");
+        this.field_94459_cP = par1IconRegister.func_94245_a("morered:chargebottom");
+        this.field_94458_cO = par1IconRegister.func_94245_a("morered:chargetop");
+    }
+	
     public int idDropped(int i, Random random) 
     { 
        return MoreRed.recharger.blockID; 
@@ -45,116 +66,6 @@ public class BlockToolCharger extends Block
     public boolean renderAsNormalBlock()
     {
             return false;
-    }
-    public int getBlockTextureFromSideAndMetadata(int i, int j)
-    {
-            if (j == 1)
-            {
-            	if (i == 0)
-                {
-                        return 2;
-                }
-                if (i == 1)
-                {
-                        return 16;
-                }
-                else
-                {
-                        return 1;
-                }
-            }
-            if (j == 2)
-            {
-            	if (i == 0)
-                {
-                        return 2;
-                }
-                if (i == 1)
-                {
-                        return 32;
-                }
-                else
-                {
-                        return 1;
-                }
-            }
-            if (j == 3)
-            {
-            	if (i == 0)
-                {
-                        return 2;
-                }
-                if (i == 1)
-                {
-                        return 48;
-                }
-                else
-                {
-                        return 1;
-                }
-            }
-            if (j == 4)
-            {
-            	if (i == 0)
-                {
-                        return 2;
-                }
-                if (i == 1)
-                {
-                        return 64;
-                }
-                else
-                {
-                        return 1;
-                }
-            }
-            if (j == 5)
-            {
-            	if (i == 0)
-                {
-                        return 2;
-                }
-                if (i == 1)
-                {
-                        return 80;
-                }
-                else
-                {
-                        return 1;
-                }
-            }
-            if (j == 6)
-            {
-            	if (i == 0)
-                {
-                        return 2;
-                }
-                if (i == 1)
-                {
-                        return 96;
-                }
-                else
-                {
-                        return 1;
-                }
-            }
-            else return getBlockTextureFromSide(i);
-    }
-
-    public int getBlockTextureFromSide(int i)
-    {
-            if (i == 0)
-            {
-                    return 2;
-            }
-            if (i == 1)
-            {
-                    return 0;
-            }
-            else
-            {
-                    return 1;
-            }
     }
     public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
@@ -188,18 +99,7 @@ public class BlockToolCharger extends Block
     	}
     	else
     	{
-    		if (world.isBlockProvidingPowerTo(x - 1, y, z, 4)) charge += 2;
-    		if (world.isBlockProvidingPowerTo(x + 1, y, z, 5)) charge += 2;
-    		if (world.isBlockProvidingPowerTo(x, y - 1, z, 0)) charge += 2;
-    		if (world.isBlockProvidingPowerTo(x, y + 1, z, 1)) charge += 2;
-    		if (world.isBlockProvidingPowerTo(x, y, z - 1, 2)) charge += 2;
-    		if (world.isBlockProvidingPowerTo(x, y, z + 1, 3)) charge += 2;
-    		if (world.isBlockIndirectlyProvidingPowerTo(x - 1, y, z, 4)) charge += 1;
-    		if (world.isBlockIndirectlyProvidingPowerTo(x + 1, y, z, 5)) charge += 1;
-    		if (world.isBlockIndirectlyProvidingPowerTo(x, y - 1, z, 0)) charge += 1;
-    		if (world.isBlockIndirectlyProvidingPowerTo(x, y + 1, z, 1)) charge += 1;
-    		if (world.isBlockIndirectlyProvidingPowerTo(x, y, z - 1, 2)) charge += 1;
-    		if (world.isBlockIndirectlyProvidingPowerTo(x, y, z + 1, 3)) charge += 1;
+    		if (world.getBlockId(x, y - 1, z) == Block.field_94341_cq.blockID) charge += 5;
     	}
     	
     	if (heldItem.getItem().equals(MoreRed.rsPick)) //|| World.getBlockMetadata(x, y, z).equals(1)) If the held item is a book then we execute this piece of code
@@ -272,7 +172,7 @@ public class BlockToolCharger extends Block
     	{
     		if (meta == 0)
     		{
-    			world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 1);//This places a block at the location of the block you rightclicked on.
+    			world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 1, 1);//This places a block at the location of the block you rightclicked on.
     			player.inventory.setInventorySlotContents(player.inventory.currentItem, null);//replace the currentheld item with a piece of raw pork.
     			return true;
     		}
@@ -281,7 +181,7 @@ public class BlockToolCharger extends Block
     	{
     		if (meta == 0)
     		{
-    			world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 2);//This places a block at the location of the block you rightclicked on.
+    			world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 2, 1);//This places a block at the location of the block you rightclicked on.
     			player.inventory.setInventorySlotContents(player.inventory.currentItem, null);//replace the currentheld item with a piece of raw pork.
     			return true;
     		}
@@ -290,7 +190,7 @@ public class BlockToolCharger extends Block
     	{
     		if (meta == 0)
     		{
-    			world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 3);
+    			world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 3, 1);
     			player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
     			return true;
     		}
@@ -300,7 +200,7 @@ public class BlockToolCharger extends Block
     	{
     		if (meta == 0)
     		{
-    			world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 4);
+    			world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 4, 1);
     			player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
     			return true;
     		}
@@ -309,7 +209,7 @@ public class BlockToolCharger extends Block
     	{
     		if (meta == 0)
     		{
-    			world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 5);
+    			world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 5, 1);
     			player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
     			return true;
     		}
@@ -318,14 +218,14 @@ public class BlockToolCharger extends Block
     	{
     		if (meta == 0)
     		{
-    			world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 6);
+    			world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 6, 1);
     			player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
     			return true;
     		}
     	}
     	if (heldItem.getItem().equals(MoreRed.crowbar))
     	{
-    		world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 0);
+    		world.setBlockAndMetadataWithNotify(x, y, z, MoreRed.recharger.blockID, 0, 1);
     		if (meta == 1)
     		{
     			player.inventory.addItemStackToInventory(new ItemStack(Item.pickaxeStone, 1));

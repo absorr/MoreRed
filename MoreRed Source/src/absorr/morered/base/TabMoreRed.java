@@ -13,7 +13,7 @@ public class TabMoreRed extends CreativeTabs {
 	@SideOnly(Side.CLIENT)
 	public int getTabIconItemIndex()
 	{
-		return MoreRed.rsIngot.shiftedIndex;
+		return MoreRed.rsIngot.itemID;
 	}
 
 	public String getTranslatedTabLabel()

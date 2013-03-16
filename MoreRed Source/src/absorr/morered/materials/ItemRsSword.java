@@ -26,11 +26,6 @@ public class ItemRsSword extends Item
         this.weaponDamage = 4 + par2EnumToolMaterial.getDamageVsEntity();
         this.setCreativeTab(CreativeTabs.tabCombat);
     }
-    @Override
-	public String getTextureFile() 
-	{
-		return CommonProxy.itemPic;
-	}
 
     /**
      * Returns the strength of the stack against a given block. 1.0F base, (Quality+1)*2 if correct blocktype, 1.5F if

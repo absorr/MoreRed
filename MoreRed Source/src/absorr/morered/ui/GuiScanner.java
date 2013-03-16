@@ -44,9 +44,8 @@ public class GuiScanner extends GuiContainer
      */
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
     {
-        int var4 = this.mc.renderEngine.getTexture("/absorr/morered/scan.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture(var4);
+        this.mc.renderEngine.func_98187_b("/mods/morered/gui/scan.png");
         int var5 = (this.width - this.xSize) / 2;
         int var6 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
@@ -63,7 +62,7 @@ public class GuiScanner extends GuiContainer
         int intX = this.invFurnaceInventory.xCoord;
     	int intY = this.invFurnaceInventory.yCoord;
     	int intZ = this.invFurnaceInventory.zCoord;
-        controlList.add(buttonName = new GuiButton(1, width / 2 + 17, height / 2 - 50, 20, 20, getMode(intX, intY, intZ, ModLoader.getMinecraftInstance().theWorld)));
+        //controlList.add(buttonName = new GuiButton(1, width / 2 + 17, height / 2 - 50, 20, 20, getMode(intX, intY, intZ, ModLoader.getMinecraftInstance().theWorld)));
     }
     
     public static String getMode(int x, int y, int z, World world)

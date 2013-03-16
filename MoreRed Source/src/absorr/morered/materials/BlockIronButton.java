@@ -7,7 +7,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockButton;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -21,15 +26,22 @@ import absorr.morered.base.MoreRed;
 
 public class BlockIronButton extends BlockButton
 {
-    public BlockIronButton(int par1, int par2)
+    public BlockIronButton(int par1)
     {
-        super(par1, par2, false);
+        super(par1, false);
         this.setTickRandomly(true);
         this.setCreativeTab(CreativeTabs.tabRedstone);
     }
     
     static Map timeMap = new HashMap();
     public static int time;
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void func_94332_a(IconRegister par1IconRegister)
+    {
+    	this.field_94336_cN = Block.blockSteel.getBlockTextureFromSide(0);
+    }
 
     /**
      * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
@@ -94,7 +106,7 @@ public class BlockIronButton extends BlockButton
             }
             else
             {
-                par1World.setBlockMetadataWithNotify(par2, par3, par4, var7 + var8);
+                par1World.setBlockMetadataWithNotify(par2, par3, par4, var7 + var8, 1);
                 par1World.markBlockRangeForRenderUpdate(par2, par3, par4, par2, par3, par4);
                 par1World.playSoundEffect((double)par2 + 0.5D, (double)par3 + 0.5D, (double)par4 + 0.5D, "random.click", 0.3F, 0.6F);
                 par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
@@ -206,7 +218,7 @@ public class BlockIronButton extends BlockButton
 
             if ((var6 & 8) != 0)
             {
-                par1World.setBlockMetadataWithNotify(par2, par3, par4, var6 & 7);
+                par1World.setBlockMetadataWithNotify(par2, par3, par4, var6 & 7, 1);
                 par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
                 int var7 = var6 & 7;
 

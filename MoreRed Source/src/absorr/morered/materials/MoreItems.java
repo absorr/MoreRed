@@ -1,20 +1,23 @@
 package absorr.morered.materials;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import absorr.morered.base.CommonProxy;
 
 public class MoreItems extends Item
 {
-	public MoreItems(int i, int stack, CreativeTabs tab)
+private static String name;
+	
+	public MoreItems(int i, int stack, String codeName)
     {
          super(i);
          maxStackSize = stack;
-         this.setCreativeTab(CreativeTabs.tabMisc);
+         this.name = codeName;
     }
-
+	
 	@Override
-	public String getTextureFile() 
+	public void func_94581_a(IconRegister iconRegister)
 	{
-		return CommonProxy.itemPic;
+	         iconIndex = iconRegister.func_94245_a(name);
 	}
 }

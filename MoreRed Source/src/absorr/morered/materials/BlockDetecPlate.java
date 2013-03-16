@@ -22,20 +22,14 @@ import absorr.morered.ui.GuiDetecPlate;
 public class BlockDetecPlate extends BlockContainer
 {
 
-    public BlockDetecPlate(int par1, int par2, Material par4Material)
+    public BlockDetecPlate(int par1, Material par4Material)
     {
-        super(par1, par2, par4Material);
+        super(par1, par4Material);
         this.setCreativeTab(CreativeTabs.tabRedstone);
         this.setTickRandomly(true);
         float var5 = 0.0625F;
         this.setBlockBounds(var5, 0.0F, var5, 1.0F - var5, 0.03125F, 1.0F - var5);
     }
-    
-	@Override
-	public String getTextureFile() 
-	{
-		return CommonProxy.blockPic;
-	}
 
     /**
      * How many world ticks before ticking
@@ -100,7 +94,7 @@ public class BlockDetecPlate extends BlockContainer
         if (var6)
         {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-            par1World.setBlockWithNotify(par2, par3, par4, 0);
+            par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, 0, 1);
         }
     }
 
@@ -157,7 +151,7 @@ public class BlockDetecPlate extends BlockContainer
 
         if (var6 && !var5)
         {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 1);
+            par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, 0, 2);
             par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
             par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
             par1World.markBlockRangeForRenderUpdate(par2, par3, par4, par2, par3, par4);
@@ -166,7 +160,7 @@ public class BlockDetecPlate extends BlockContainer
 
         if (!var6 && var5)
         {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 0);
+            par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, 0, 2);
             par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
             par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
             par1World.markBlockRangeForRenderUpdate(par2, par3, par4, par2, par3, par4);

@@ -15,10 +15,4 @@ public class ItemRsHoe extends ItemHoe
 		super(par1, par2EnumToolMaterial);
 		this.setCreativeTab(CreativeTabs.tabTools);
 	}
-	
-	@Override
-	public String getTextureFile() 
-	{
-		return CommonProxy.itemPic;
-	}
 }

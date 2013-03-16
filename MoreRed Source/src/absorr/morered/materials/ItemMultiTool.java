@@ -24,12 +24,6 @@ public class ItemMultiTool extends ItemTool
 		this.setCreativeTab(CreativeTabs.tabTools);
 	}
 	
-	@Override
-	public String getTextureFile() 
-	{
-		return CommonProxy.itemPic;
-	}
-	
 	/**
      * Returns if the item (tool) can harvest results from the block type.
      */

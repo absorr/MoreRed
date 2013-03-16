@@ -27,22 +27,22 @@ public class Config
 	    public static int configurationProperties()
 	    {
 	            configuration.load();
-	            rechargeID = Integer.parseInt(configuration.getBlock(Configuration.CATEGORY_BLOCK, "Tool_Recharging_Station", 190).value);
-	            scannerID = Integer.parseInt(configuration.getBlock(Configuration.CATEGORY_BLOCK, "Inventory_Scanner", 193).value);
-	            ironButtonID = Integer.parseInt(configuration.getBlock(Configuration.CATEGORY_BLOCK, "Iron_Button", 194).value);
-	            rsChestID = Integer.parseInt(configuration.getBlock(Configuration.CATEGORY_BLOCK, "Redstone_Chest", 195).value);
-	            detecID = Integer.parseInt(configuration.getBlock(Configuration.CATEGORY_BLOCK, "Detection_Plate", 196).value);
-	            playPlateID = Integer.parseInt(configuration.getBlock(Configuration.CATEGORY_BLOCK, "Player_Plate", 197).value);
-	            rsChunkID = Integer.parseInt(configuration.getItem(Configuration.CATEGORY_ITEM, "Redstone_Chunk", 5980).value);
-	            rsIngotID = Integer.parseInt(configuration.getItem(Configuration.CATEGORY_ITEM, "Redstone_Ingot", 5981).value);
-	            rsPickID = Integer.parseInt(configuration.getItem(Configuration.CATEGORY_ITEM, "Redstone_Pickaxe", 5983).value);
-	            rsSpadeID = Integer.parseInt(configuration.getItem(Configuration.CATEGORY_ITEM, "Redstone_Shovel", 5984).value);
-	            rsHoeID = Integer.parseInt(configuration.getItem(Configuration.CATEGORY_ITEM, "Redstone_Hoe", 5985).value);
-	            rsAxeID = Integer.parseInt(configuration.getItem(Configuration.CATEGORY_ITEM, "Redstone_Axe", 5986).value);
-	            rsSwordID = Integer.parseInt(configuration.getItem(Configuration.CATEGORY_ITEM, "Redstone_Sword", 5987).value);
-	            rsMultiID = Integer.parseInt(configuration.getItem(Configuration.CATEGORY_ITEM, "Redstone_Multi_Tool", 5988).value);
-	            crowbarID = Integer.parseInt(configuration.getItem(Configuration.CATEGORY_ITEM, "Crowbar", 5999).value);
-	            screwdriverID = Integer.parseInt(configuration.getItem(Configuration.CATEGORY_ITEM, "Screwdriver", 6000).value);
+	            rechargeID = configuration.getBlock(Configuration.CATEGORY_BLOCK, "Tool_Recharging_Station", 190).getInt();
+	            scannerID = configuration.getBlock(Configuration.CATEGORY_BLOCK, "Inventory_Scanner", 193).getInt();
+	            ironButtonID = configuration.getBlock(Configuration.CATEGORY_BLOCK, "Iron_Button", 194).getInt();
+	            rsChestID = configuration.getBlock(Configuration.CATEGORY_BLOCK, "Redstone_Chest", 195).getInt();
+	            detecID = configuration.getBlock(Configuration.CATEGORY_BLOCK, "Detection_Plate", 196).getInt();
+	            playPlateID = configuration.getBlock(Configuration.CATEGORY_BLOCK, "Player_Plate", 197).getInt();
+	            rsChunkID = configuration.getItem(Configuration.CATEGORY_ITEM, "Redstone_Chunk", 5980).getInt();
+	            rsIngotID = configuration.getItem(Configuration.CATEGORY_ITEM, "Redstone_Ingot", 5981).getInt();
+	            rsPickID = configuration.getItem(Configuration.CATEGORY_ITEM, "Redstone_Pickaxe", 5983).getInt();
+	            rsSpadeID = configuration.getItem(Configuration.CATEGORY_ITEM, "Redstone_Shovel", 5984).getInt();
+	            rsHoeID = configuration.getItem(Configuration.CATEGORY_ITEM, "Redstone_Hoe", 5985).getInt();
+	            rsAxeID = configuration.getItem(Configuration.CATEGORY_ITEM, "Redstone_Axe", 5986).getInt();
+	            rsSwordID = configuration.getItem(Configuration.CATEGORY_ITEM, "Redstone_Sword", 5987).getInt();
+	            rsMultiID = configuration.getItem(Configuration.CATEGORY_ITEM, "Redstone_Multi_Tool", 5988).getInt();
+	            crowbarID = configuration.getItem(Configuration.CATEGORY_ITEM, "Crowbar", 5999).getInt();
+	            screwdriverID = configuration.getItem(Configuration.CATEGORY_ITEM, "Screwdriver", 6000).getInt();
 	            configuration.save();
 	            return rechargeID;
 	    }

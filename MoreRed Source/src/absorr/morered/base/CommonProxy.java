@@ -6,8 +6,6 @@ import net.minecraft.village.*;
 
 public class CommonProxy 
 {
-	public static String itemPic = "/absorr/morered/items.png";
-	public static String blockPic = "/absorr/morered/blocks.png";
 	
 	/*
 	 * Creates more villager trading recipes

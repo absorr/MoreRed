@@ -63,22 +63,22 @@ public class MoreRed extends BaseMod
     	
     	creativeTab = new TabMoreRed("MoreRed");
     	
-    	rsChunk = new MoreItems(Config.rsChunkID, 64, CreativeTabs.tabMaterials).setItemName("redstoneChunk").setIconIndex(2).setCreativeTab(creativeTab);
-    	rsIngot = new MoreItems(Config.rsIngotID, 64, CreativeTabs.tabMaterials).setItemName("redstoneIngot").setIconIndex(3).setCreativeTab(creativeTab);
-    	rsPick = new ItemPickaxe(Config.rsPickID, EnumToolMaterial.IRON).setItemName("redstonePickaxe").setIconIndex(4).setTextureFile(proxy.itemPic).setCreativeTab(CreativeTabs.tabTools);
-        rsSpade = new ItemSpade(Config.rsSpadeID, EnumToolMaterial.IRON).setItemName("redstoneShovel").setIconIndex(5).setTextureFile(proxy.itemPic).setCreativeTab(CreativeTabs.tabTools);
-        rsHoe = new ItemHoe(Config.rsHoeID, EnumToolMaterial.IRON).setItemName("redstoneHoe").setIconIndex(6).setTextureFile(proxy.itemPic).setCreativeTab(CreativeTabs.tabTools);
-        rsAxe = new ItemAxe(Config.rsAxeID, EnumToolMaterial.IRON).setItemName("redstoneAxe").setIconIndex(7).setTextureFile(proxy.itemPic).setCreativeTab(CreativeTabs.tabTools);
-        rsSword = new ItemRsSword(Config.rsSwordID, EnumToolMaterial.IRON).setItemName("redstoneSword").setIconIndex(8).setTextureFile(proxy.itemPic).setCreativeTab(CreativeTabs.tabTools);
-        rsMulti = new ItemMultiTool(Config.rsMultiID, 1, EnumToolMaterial.IRON).setItemName("redstoneMultitool").setIconIndex(14).setCreativeTab(CreativeTabs.tabTools);
-        crowbar = new MoreItems(Config.crowbarID, 1, CreativeTabs.tabTools).setItemName("crowbar").setIconIndex(16).setCreativeTab(creativeTab);
-        screwdriver = new MoreItems(Config.screwdriverID, 1, CreativeTabs.tabTools).setItemName("screwdriver").setIconIndex(1).setCreativeTab(creativeTab);
-        recharger = new BlockToolCharger(Config.rechargeID, 0).setHardness(1.0F).setResistance(6000.0F).setLightValue(1.0F).setBlockName("Tool Recharging Station").setCreativeTab(creativeTab); 
-        invScanner = new BlockInventoryScanner(Config.scannerID, 6).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Inventory Scanner").setCreativeTab(creativeTab); 
-        ironButton = new BlockIronButton(Config.ironButtonID, 22).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Iron Button").setCreativeTab(creativeTab); 
-        rsChest = new BlockRedChest(Config.rsChestID).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Redstone Chest").setCreativeTab(creativeTab); 
-        detecPlate = new BlockDetecPlate(Config.detecID, 4, Material.rock).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Detection Plate").setCreativeTab(creativeTab);
-        playerPlate = new BlockPlayerPlate(Config.playPlateID, 3, Material.rock).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Player Plate").setCreativeTab(creativeTab);
+    	rsChunk = new MoreItems(Config.rsChunkID, 64, "morered:rschunk").setUnlocalizedName("redstoneChunk").setCreativeTab(creativeTab);
+    	rsIngot = new MoreItems(Config.rsIngotID, 64, "morered:rsingot").setUnlocalizedName("redstoneIngot").setCreativeTab(creativeTab);
+    	rsPick = new ItemPickaxe(Config.rsPickID, EnumToolMaterial.IRON).setUnlocalizedName("redstonePickaxe").setCreativeTab(CreativeTabs.tabTools);
+        rsSpade = new ItemSpade(Config.rsSpadeID, EnumToolMaterial.IRON).setUnlocalizedName("redstoneShovel").setCreativeTab(CreativeTabs.tabTools);
+        rsHoe = new ItemHoe(Config.rsHoeID, EnumToolMaterial.IRON).setUnlocalizedName("morered:rshoe").setCreativeTab(CreativeTabs.tabTools);
+        rsAxe = new ItemAxe(Config.rsAxeID, EnumToolMaterial.IRON).setUnlocalizedName("morered:rsaxe").setCreativeTab(CreativeTabs.tabTools);
+        rsSword = new ItemRsSword(Config.rsSwordID, EnumToolMaterial.IRON).setUnlocalizedName("morered:rssword").setCreativeTab(CreativeTabs.tabTools);
+        rsMulti = new ItemMultiTool(Config.rsMultiID, 1, EnumToolMaterial.IRON).setUnlocalizedName("morered:rsmulti").setCreativeTab(CreativeTabs.tabTools);
+        crowbar = new MoreItems(Config.crowbarID, 1, "morered:crowbar").setUnlocalizedName("crowbar").setCreativeTab(creativeTab);
+        screwdriver = new MoreItems(Config.screwdriverID, 1, "morered:screwdrive").setUnlocalizedName("screwdriver").setCreativeTab(creativeTab);
+        recharger = new BlockToolCharger(Config.rechargeID).setHardness(1.0F).setResistance(6000.0F).setLightValue(1.0F).setUnlocalizedName("Tool Recharging Station").setCreativeTab(creativeTab); 
+        invScanner = new BlockInventoryScanner(Config.scannerID).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setUnlocalizedName("Inventory Scanner").setCreativeTab(creativeTab); 
+        ironButton = new BlockIronButton(Config.ironButtonID).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setUnlocalizedName("Iron Button").setCreativeTab(creativeTab); 
+        //rsChest = new BlockRedChest(Config.rsChestID).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setUnlocalizedName("Redstone Chest").setCreativeTab(creativeTab); 
+        //detecPlate = new BlockDetecPlate(Config.detecID, 4, Material.rock).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setUnlocalizedName("Detection Plate").setCreativeTab(creativeTab);
+        playerPlate = new BlockPlayerPlate(Config.playPlateID, "morered:plateplayer", Material.rock, EnumMobType.players).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setUnlocalizedName("Player Plate").setCreativeTab(creativeTab);
 
     	loadMaterials();
     	proxy.addMerchantRecipies();
@@ -106,7 +106,7 @@ public class MoreRed extends BaseMod
         }
     	//Redstone Chunk
         LanguageRegistry.addName(rsChunk, "Redstone Chunk");
-        GameRegistry.addSmelting(Item.redstone.shiftedIndex, new ItemStack(rsChunk), 0.1F);
+        GameRegistry.addSmelting(Item.redstone.itemID, new ItemStack(rsChunk), 0.1F);
         //Redstone Ingot
         LanguageRegistry.addName(rsIngot, "Redstone Ingot");
         GameRegistry.addShapelessRecipe(new ItemStack(rsIngot, 1), new Object[] {rsChunk, rsChunk});
@@ -155,13 +155,13 @@ public class MoreRed extends BaseMod
         ModLoader.addName(screwdriver, "Screwdriver");
         ModLoader.addRecipe(new ItemStack(screwdriver, 1), new Object[] {"IO", "IO", 'I', Item.ingotIron});
         //Redstone Chest
-        ModLoader.registerBlock(rsChest); 
+        /**ModLoader.registerBlock(rsChest); 
         ModLoader.addName(new ItemStack(rsChest), "Redstone Chest");
         ModLoader.addRecipe(new ItemStack(rsChest, 1), new Object[] {"ORO", "RCR", "RRR", 'R', rsIngot, 'C', Block.chest});
         //Detection Plate
         ModLoader.registerBlock(detecPlate); 
         ModLoader.addName(new ItemStack(detecPlate), "Detection Plate");
-        ModLoader.addRecipe(new ItemStack(detecPlate), new Object[] {"CRC", "RER", "CBC", 'R', rsIngot, 'B', playerPlate, 'C', Item.brick, 'E', Item.enderPearl});
+        ModLoader.addRecipe(new ItemStack(detecPlate), new Object[] {"CRC", "RER", "CBC", 'R', rsIngot, 'B', playerPlate, 'C', Item.brick, 'E', Item.enderPearl});*/
         //Player Plate
         ModLoader.registerBlock(playerPlate); 
         ModLoader.addName(new ItemStack(playerPlate), "Player Plate");
