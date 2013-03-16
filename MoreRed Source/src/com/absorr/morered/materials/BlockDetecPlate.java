@@ -1,7 +1,12 @@
-package absorr.morered.materials;
+package com.absorr.morered.materials;
 
 import java.util.List;
 import java.util.Random;
+
+import com.absorr.morered.base.CommonProxy;
+import com.absorr.morered.ui.ContainerDetecPlate;
+import com.absorr.morered.ui.GuiDetecPlate;
+
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockFence;
@@ -15,9 +20,6 @@ import net.minecraft.tileentity.*;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import absorr.morered.base.CommonProxy;
-import absorr.morered.ui.ContainerDetecPlate;
-import absorr.morered.ui.GuiDetecPlate;
 
 public class BlockDetecPlate extends BlockContainer
 {

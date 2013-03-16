@@ -1,4 +1,6 @@
-package absorr.morered.base;
+package com.absorr.morered.base;
+
+import com.absorr.morered.base.MoreRed;
 
 import net.minecraft.creativetab.CreativeTabs;
 

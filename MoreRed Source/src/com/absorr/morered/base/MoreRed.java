@@ -1,4 +1,4 @@
-package absorr.morered.base;
+package com.absorr.morered.base;
 
 //import net.minecraft.src.absorr.morered.external.IC2Handler;
 import net.minecraft.block.*;
@@ -18,17 +18,19 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import com.absorr.morered.base.*;
+import com.absorr.morered.materials.*;
+import com.absorr.morered.ui.GuiDetecPlate;
+import com.absorr.morered.ui.GuiScanner;
+
+
 import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.*;
-import absorr.morered.base.*;
-import absorr.morered.materials.*;
-import absorr.morered.ui.GuiDetecPlate;
-import absorr.morered.ui.GuiScanner;
 
-@Mod(modid="MoreRed", name="MoreRed", version="Build 008")
+@Mod(modid="MoreRed", name="MoreRed", version="Build 010")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class MoreRed extends BaseMod
 {
@@ -169,7 +171,7 @@ public class MoreRed extends BaseMod
     }
     public String getVersion()
     {
-        return "1.1.008";
+        return "1.2.0.010";
     }
     @Override
     public GuiContainer getContainerGUI(EntityClientPlayerMP player, int id, int x, int y, int z)

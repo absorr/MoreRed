@@ -1,4 +1,4 @@
-package absorr.morered.ui;
+package com.absorr.morered.ui;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -15,7 +15,8 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import absorr.morered.materials.TileEntityScanner;
+import com.absorr.morered.materials.TileEntityScanner;
+
 
 
 public class GuiScanner extends GuiContainer

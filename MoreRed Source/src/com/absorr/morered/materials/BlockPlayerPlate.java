@@ -1,4 +1,4 @@
-package absorr.morered.materials;
+package com.absorr.morered.materials;
 
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;

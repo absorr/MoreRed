@@ -1,4 +1,4 @@
-package absorr.morered.materials;
+package com.absorr.morered.materials;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,6 +6,9 @@ import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
+import com.absorr.morered.base.MoreRed;
+
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,7 +25,6 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.MinecraftException;
 import net.minecraft.world.World;
-import absorr.morered.base.MoreRed;
 
 public class BlockIronButton extends BlockButton
 {

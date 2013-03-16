@@ -1,4 +1,4 @@
-package absorr.morered.ui;
+package com.absorr.morered.ui;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -6,7 +6,8 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-import absorr.morered.materials.TileEntityDetecPlate;
+import com.absorr.morered.materials.TileEntityDetecPlate;
+
 
 public class GuiDetecPlate extends GuiContainer
 {

@@ -1,4 +1,6 @@
-package absorr.morered.materials;
+package com.absorr.morered.materials;
+
+import com.absorr.morered.base.CommonProxy;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -10,7 +12,6 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import absorr.morered.base.CommonProxy;
 
 public class ItemRsSword extends Item
 {

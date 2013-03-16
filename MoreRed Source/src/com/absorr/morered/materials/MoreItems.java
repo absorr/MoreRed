@@ -1,8 +1,9 @@
-package absorr.morered.materials;
+package com.absorr.morered.materials;
+import com.absorr.morered.base.CommonProxy;
+
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import absorr.morered.base.CommonProxy;
 
 public class MoreItems extends Item
 {

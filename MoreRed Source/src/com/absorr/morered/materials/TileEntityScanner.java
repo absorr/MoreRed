@@ -1,4 +1,4 @@
-package absorr.morered.materials;
+package com.absorr.morered.materials;
 import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,7 +1,13 @@
-package absorr.morered.materials;
+package com.absorr.morered.materials;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import com.absorr.morered.base.CommonProxy;
+import com.absorr.morered.base.MoreRed;
+import com.absorr.morered.ui.ContainerScanner;
+import com.absorr.morered.ui.GuiScanner;
+
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -22,10 +28,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import absorr.morered.base.CommonProxy;
-import absorr.morered.base.MoreRed;
-import absorr.morered.ui.ContainerScanner;
-import absorr.morered.ui.GuiScanner;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

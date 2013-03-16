@@ -1,8 +1,11 @@
-package absorr.morered.materials;
+package com.absorr.morered.materials;
 import java.util.ArrayList;
 import java.util.Random;
 
+
 import com.absorr.morecrafts.base.MoreCrafts;
+import com.absorr.morered.base.CommonProxy;
+import com.absorr.morered.base.MoreRed;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -17,8 +20,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import absorr.morered.base.CommonProxy;
-import absorr.morered.base.MoreRed;
 
 
 public class BlockToolCharger extends Block

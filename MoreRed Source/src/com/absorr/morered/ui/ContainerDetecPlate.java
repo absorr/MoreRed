@@ -1,47 +1,49 @@
-package absorr.morered.ui;
+package com.absorr.morered.ui;
 
-import absorr.morered.materials.TileEntityScanner;
+import com.absorr.morered.materials.TileEntityDetecPlate;
+
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerScanner extends Container
+public class ContainerDetecPlate extends Container
 {
-    private TileEntityScanner scanner;
+    private TileEntityDetecPlate plate;
     
-    public ContainerScanner(InventoryPlayer par1InventoryPlayer, TileEntityScanner par2TileEntityFurnace)
+    public ContainerDetecPlate(IInventory par1IInventory, TileEntityDetecPlate par2TileEntity)
     {
-    	this.scanner = par2TileEntityFurnace;
+    	this.plate = par2TileEntity;
         int var3;
         int var4;
+        int var5;
 
-        for (var3 = 0; var3 < 3; ++var3)
+        for (var3 = 0; var3 < 1; ++var3)
         {
             for (var4 = 0; var4 < 3; ++var4)
             {
-                this.addSlotToContainer(new Slot(par2TileEntityFurnace, var4 + var3 * 3, 44 + var4 * 18, 17 + var3 * 18));
+                this.addSlotToContainer(new Slot(par2TileEntity, var4 + var3 * 3, 44 + var4 * 18, 17 + var3 * 18));
             }
         }
 
         for (var3 = 0; var3 < 3; ++var3)
         {
-            for (var4 = 0; var4 < 3; ++var4)
+            for (var4 = 0; var4 < 9; ++var4)
             {
-                this.addSlotToContainer(new Slot(par1InventoryPlayer, var4 + var3 * 9 + 9, 8 + var4 * 18, 84 + var3 * 18));
+                this.addSlotToContainer(new Slot(par1IInventory, var4 + var3 * 9 + 9, 8 + var4 * 18, 84 + var3 * 18));
             }
         }
 
-        for (var3 = 0; var3 < 3; ++var3)
+        for (var3 = 0; var3 < 9; ++var3)
         {
-            this.addSlotToContainer(new Slot(par1InventoryPlayer, var3, 8 + var3 * 18, 142));
+            this.addSlotToContainer(new Slot(par1IInventory, var3, 8 + var3 * 18, 142));
         }
     }
     
     public boolean canInteractWith(EntityPlayer par1EntityPlayer)
     {
-        return this.scanner.isUseableByPlayer(par1EntityPlayer);
+        return this.plate.isUseableByPlayer(par1EntityPlayer);
     }
     /**
      * Called to transfer a stack from one inventory to the other eg. when shift clicking.

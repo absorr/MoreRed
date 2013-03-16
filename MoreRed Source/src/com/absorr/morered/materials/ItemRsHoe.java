@@ -1,9 +1,10 @@
-package absorr.morered.materials;
+package com.absorr.morered.materials;
+
+import com.absorr.morered.base.CommonProxy;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemHoe;
-import absorr.morered.base.CommonProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

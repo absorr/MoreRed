@@ -1,4 +1,4 @@
-package absorr.morered.base;
+package com.absorr.morered.base;
 
 import java.io.File;
 
